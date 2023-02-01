@@ -7,6 +7,8 @@
 #'
 #' @return Returns an object in the form of a data frame that includes naive prevalence, and confidence intervals. If group = T, this data frame also includes
 
+#' @export
+
 cpCI <- function(data, column, conf, group = NULL, print = FALSE){
 
   # Data type
