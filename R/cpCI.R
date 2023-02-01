@@ -8,7 +8,7 @@
 #' @param print Logical, allows for printing of data frame when creating an object from the data frame
 #'
 #' @return Returns an object in the form of a data frame that includes naive prevalence, and confidence intervals. If group = T, this data frame also includes
-
+#'
 #' @export
 
 cpCI <- function(data, column, conf, group = NULL, print = FALSE){
