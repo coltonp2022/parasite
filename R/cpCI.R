@@ -1,3 +1,5 @@
+#' Calculate Clopper-Pearson confidence intervals
+#'
 #' This function allows you to calculate Clopper-Pearson confidence intervals.
 #' @param data A data frame with parasite data
 #' @param column Character, indicating the column consisting of binomial presence data in 1,0 form
