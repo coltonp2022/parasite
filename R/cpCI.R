@@ -1,8 +1,4 @@
-# Calculate Clopper Pearson Intervals Function
-# Colton Padilla
-# 1/31/2022
-
-#' cpCI Calculate Clopper-Pearson confidence intervals
+#' Calculate Clopper Pearson Intervals Function
 #'
 #' This function allows you to calculate Clopper-Pearson confidence intervals.
 #' @param data A data frame with parasite data
