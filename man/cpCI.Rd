@@ -4,7 +4,7 @@
 \alias{cpCI}
 \title{Calculate Clopper-Pearson confidence intervals}
 \usage{
-cpCI(data, column, conf, group = NULL, print = FALSE)
+cpCI(data, column, conf = 0.95, group = NULL, print = FALSE)
 }
 \arguments{
 \item{data}{A data frame with parasite data}
