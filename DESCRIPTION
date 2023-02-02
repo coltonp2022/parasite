@@ -12,3 +12,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 URL: https://github.com/coltonp2022/parasite
 BugReports: https://github.com/coltonp2022/parasite/issues
+Imports: 
+    boot,
+    dplyr,
+    PropCIs
