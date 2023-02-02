@@ -11,7 +11,7 @@
 #'
 #' @export
 
-cpCI <- function(data, column, conf, group = NULL, print = FALSE){
+cpCI <- function(data, column, conf = 0.95, group = NULL, print = FALSE){
 
   # Data type
   if(!is.data.frame(data)){
