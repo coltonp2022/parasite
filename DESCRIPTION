@@ -13,8 +13,9 @@ RoxygenNote: 7.2.3
 URL: https://github.com/coltonp2022/parasite
 BugReports: https://github.com/coltonp2022/parasite/issues
 Imports: 
+    readr
+Depends: 
     boot,
     dplyr,
     magrittr,
-    PropCIs,
-    readr
+    PropCIs

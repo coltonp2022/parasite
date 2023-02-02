@@ -2,7 +2,4 @@
 
 export(bcaCI)
 export(cpCI)
-import(PropCIs)
-import(boot)
-import(dplyr)
 import(magrittr)

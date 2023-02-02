@@ -11,8 +11,6 @@
 #'
 #' @return Returns an object in the form of a data frame that includes mean and confidence intervals. If data is grouped using the group argument, a column with your grouping variables will also be returned within this data frame.
 #'
-#' @import dplyr
-#' @import boot
 #' @import magrittr
 #'
 #' @export
@@ -44,7 +42,7 @@ bcaCI <- function(data,
     data <- data
   }
   else if(measure == "int"){
-    data <- data %>% filter(.data[[column]] > 0)
+    data <- data %>% dplyr::filter(.data[[column]] > 0)
   }
   else{
     stop("Input must be either 'abun' or 'int'")
@@ -54,11 +52,11 @@ bcaCI <- function(data,
   if(is.null(group)){
     # Run the bootstrap in a pipe
     df1 <- data %>%
-      pull(.data[[column]]) %>% # Pull the number of fleas column
-      boot(data = ., # Use that column
+      dplyr::pull(.data[[column]]) %>% # Pull the number of fleas column
+      boot::boot(data = ., # Use that column
            statistic = function(x, i) mean(x[i]), # Statistic is the mean
            R = r) %>% # Bootstrap 2000 times
-      boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
+      boot::boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
               type = "bca",
               conf = conf) # Use the bias corrected and accelerated bootstrap
 
@@ -83,11 +81,11 @@ bcaCI <- function(data,
       # Run the bootstrap in a pipe
       df1 <- df %>%
         dplyr::filter(.data[[group]] == as.character(unique(df[2])[i,])) %>%
-        pull(.data[[column]]) %>% # Pull the number of parasites column
-        boot(data = ., # Use that column
+        dplyr::pull(.data[[column]]) %>% # Pull the number of parasites column
+        boot::boot(data = ., # Use that column
              statistic = function(x, i) mean(x[i]), # Statistic is the mean
              R = r) %>% # Bootstrap r times
-        boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
+        boot::boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
                 type = "bca", # Use the bias corrected and accelerated bootstrap
                 conf = conf) # Set the confidence level
 

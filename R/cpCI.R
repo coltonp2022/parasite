@@ -8,8 +8,6 @@
 #'
 #' @return Returns an object in the form of a data frame that includes naive prevalence, and confidence intervals. If data is grouped using the group argument, this data frame also includes a column with your original groups.
 #'
-#' @import dplyr
-#' @import PropCIs
 #' @import magrittr
 #'
 #' @export
@@ -41,12 +39,12 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
   if(is.null(group)){
     # Take the input data and summarize it
     df <- data %>%
-      summarize(tot_parasite = sum(.data[[column]]), # Get a total number of parasites
-                n = n(), # Get a sample size
+      dplyr::summarize(tot_parasite = sum(.data[[column]]), # Get a total number of parasites
+                n = dplyr::n(), # Get a sample size
                 naive_prev = tot_parasite / n) # Calculate a Naive Prevalence
 
     # Now create the Confidence intervals
-    df1 <- exactci(
+    df1 <- propCIs::exactci(
       df$tot_parasite, # Total parasites
       df$n, # Total Sample Size
       conf.level = conf # Confidence
@@ -69,9 +67,9 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
   else{
     # Take the input data and summarize it
     df <- data %>%
-      group_by(.data[[group]]) %>%
-      summarize(tot_parasite = sum(.data[[column]]), # Get a total number of parasites
-                n = n(), # Get a sample size
+      dplyr::group_by(.data[[group]]) %>%
+      dplyr::summarize(tot_parasite = sum(.data[[column]]), # Get a total number of parasites
+                n = dplyr::n(), # Get a sample size
                 naive_prev = tot_parasite / n) # Calculate a Naive Prevalence
 
     # Loop through each group
@@ -79,7 +77,7 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
 
       # Subset the dataframe
       df1 <- df %>%
-        filter(.data[[group]] == as.character(unique(df[group])[i,]))
+        dplyr::filter(.data[[group]] == as.character(unique(df[group])[i,]))
 
       # Now create the Confidence intervals
       df2 <- exactci(
