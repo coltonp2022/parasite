@@ -3,7 +3,7 @@
 #' This function allows you to calculate bootstrap confidence intervals using the bca method.
 #' @param data A data frame with parasite data
 #' @param column Character, indicating the column of parasite intensity data where values are >= 0
-#' @param measure Character, indicating either abundance or intensity to be used for calculation
+#' @param measure Character, indicating either abundance ("abun") or intensity ("int") to be used for calculation
 #' @param conf Numerical, indicating the confidence level desired
 #' @param r Numerical, indicated the number of replicates for the bootstrapping function
 #' @param group Character, allows for grouping the data together and calculating intervals for each group
