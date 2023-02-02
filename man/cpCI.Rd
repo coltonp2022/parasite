@@ -2,7 +2,7 @@
 % Please edit documentation in R/cpCI.R
 \name{cpCI}
 \alias{cpCI}
-\title{This function allows you to calculate Clopper-Pearson confidence intervals.}
+\title{Calculate Clopper-Pearson confidence intervals}
 \usage{
 cpCI(data, column, conf, group = NULL, print = FALSE)
 }
