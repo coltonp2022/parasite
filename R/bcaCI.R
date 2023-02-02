@@ -11,6 +11,9 @@
 #'
 #' @return Returns an object in the form of a data frame that includes mean and confidence intervals. If data is grouped using the group argument, a column with your grouping variables will also be returned within this data frame.
 #'
+#' @import dplyr
+#' @import boot
+#'
 #' @export
 
 bcaCI <- function(data,
