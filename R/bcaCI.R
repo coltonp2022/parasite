@@ -14,22 +14,22 @@
 #' @export
 
 bcaCI <- function(data, column, conf = 0.95, r = 2000, group = NULL){
-  
+
   # Data
   if(!is.data.frame(data)){
     stop("Input must be a data frame")
   }
-  
+
   # Column
   if(!is.character(column)){
     stop("Column must be a character. For example 'flea_intensity' ")
   }
-  
+
   # Confidence
   if(!is.numeric(conf)){
     stop("Confidence must be numeric.")
   }
-  
+
   # Run the bootstrap in a pipe
   df1 <- data %>%
     pull(.data[[column]]) %>% # Pull the number of fleas column
@@ -39,15 +39,14 @@ bcaCI <- function(data, column, conf = 0.95, r = 2000, group = NULL){
     boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
             type = "bca",
             conf = conf) # Use the bias corrected and accelerated bootstrap
-  
+
   # Now get all the estimates and make a dataframe
   final_df <- data.frame(
     Mean = df1$t0,
     Lower = df1$bca[4],
     Upper = df1$bca[5]
   )
-  print(final_df)
-  
+
   # Now return that final df
   return(final_df)
 }
