@@ -4,7 +4,7 @@
 \alias{cpCI}
 \title{Calculate Clopper-Pearson confidence intervals}
 \usage{
-cpCI(data, column, conf = 0.95, group = NULL, print = FALSE)
+cpCI(data, column, conf = 0.95, group = NULL)
 }
 \arguments{
 \item{data}{A data frame with parasite data}
@@ -14,11 +14,9 @@ cpCI(data, column, conf = 0.95, group = NULL, print = FALSE)
 \item{conf}{Numerical, indicating the confidence level desired}
 
 \item{group}{Character, allows for grouping the data together and calculating intervals for each group}
-
-\item{print}{Logical, allows for printing of data frame when creating an object from the data frame}
 }
 \value{
-Returns an object in the form of a data frame that includes naive prevalence, and confidence intervals. If group = T, this data frame also includes
+Returns an object in the form of a data frame that includes naive prevalence and confidence intervals. If group = T, a column consisting of your grouping variables will also be created.
 }
 \description{
 This function allows you to calculate Clopper-Pearson confidence intervals.

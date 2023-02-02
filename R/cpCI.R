@@ -5,13 +5,12 @@
 #' @param column Character, indicating the column consisting of binomial presence data in 1,0 form
 #' @param conf Numerical, indicating the confidence level desired
 #' @param group Character, allows for grouping the data together and calculating intervals for each group
-#' @param print Logical, allows for printing of data frame when creating an object from the data frame
 #'
-#' @return Returns an object in the form of a data frame that includes naive prevalence, and confidence intervals. If group = T, this data frame also includes
+#' @return Returns an object in the form of a data frame that includes naive prevalence and confidence intervals. If group = T, a column consisting of your grouping variables will also be created.
 #'
 #' @export
 
-cpCI <- function(data, column, conf = 0.95, group = NULL, print = FALSE){
+cpCI <- function(data, column, conf = 0.95, group = NULL){
 
   # Data type
   if(!is.data.frame(data)){
@@ -59,10 +58,6 @@ cpCI <- function(data, column, conf = 0.95, group = NULL, print = FALSE){
       Upper = vector[3]
     )
 
-    if(isTRUE(print)){
-      print(final_df)
-    }
-
     # Return
     return(final_df)
   }
@@ -103,10 +98,6 @@ cpCI <- function(data, column, conf = 0.95, group = NULL, print = FALSE){
 
       return(df3)
     }))
-
-    if(isTRUE(print)){
-      print(final_df)
-    }
 
     # Return
     return(final_df)

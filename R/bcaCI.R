@@ -7,10 +7,9 @@
 #' @param conf Numerical, indicating the confidence level desired
 #' @param r Numerical, indicated the number of replicates for the bootstrapping function
 #' @param group Character, allows for grouping the data together and calculating intervals for each group
-#' @param print Logical, allows for printing of data frame when creating an object from the data frame
 #'
 #'
-#' @return Returns an object in the form of a data frame that includes mean, and confidence intervals.
+#' @return Returns an object in the form of a data frame that includes mean value and confidence intervals. If group = T, a column with your grouping variables will also be created.
 #'
 #' @export
 
@@ -80,13 +79,13 @@ bcaCI <- function(data,
       # Run the bootstrap in a pipe
       df1 <- df %>%
         dplyr::filter(.data[[group]] == as.character(unique(df[2])[i,])) %>%
-        pull(.data[[column]]) %>% # Pull the number of fleas column
+        pull(.data[[column]]) %>% # Pull the number of parasites column
         boot(data = ., # Use that column
              statistic = function(x, i) mean(x[i]), # Statistic is the mean
-             R = r) %>% # Bootstrap 2000 times
+             R = r) %>% # Bootstrap r times
         boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
-                type = "bca",
-                conf = conf) # Use the bias corrected and accelerated bootstrap
+                type = "bca", # Use the bias corrected and accelerated bootstrap
+                conf = conf) # Set the confidence level
 
       # Now get all the estimates and make a dataframe
       df2 <- data.frame(

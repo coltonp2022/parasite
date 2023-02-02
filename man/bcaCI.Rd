@@ -18,11 +18,9 @@ bcaCI(data, column, measure, conf = 0.95, r = 2000, group = NULL)
 \item{r}{Numerical, indicated the number of replicates for the bootstrapping function}
 
 \item{group}{Character, allows for grouping the data together and calculating intervals for each group}
-
-\item{print}{Logical, allows for printing of data frame when creating an object from the data frame}
 }
 \value{
-Returns an object in the form of a data frame that includes mean, and confidence intervals.
+Returns an object in the form of a data frame that includes mean value and confidence intervals. If group = T, a column with your grouping variables will also be created.
 }
 \description{
 This function allows you to calculate bootstrap confidence intervals using the bca method.
