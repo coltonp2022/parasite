@@ -44,7 +44,7 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
                 naive_prev = tot_parasite / n) # Calculate a Naive Prevalence
 
     # Now create the Confidence intervals
-    df1 <- propCIs::exactci(
+    df1 <- PropCIs::exactci(
       df$tot_parasite, # Total parasites
       df$n, # Total Sample Size
       conf.level = conf # Confidence
@@ -80,7 +80,7 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
         dplyr::filter(.data[[group]] == as.character(unique(df[group])[i,]))
 
       # Now create the Confidence intervals
-      df2 <- exactci(
+      df2 <- PropCIs::exactci(
         df1$tot_parasite, # Total parasites
         df1$n, # Total Sample Size
         conf.level = conf # Confidence
