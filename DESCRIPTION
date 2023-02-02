@@ -1,10 +1,10 @@
 Package: parasite
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Package for calculating standard parasitology measures
+Version: 1.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Colton", "Padilla", , "coltonpadilla18@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: This package allows users to calculate standard parasitology measures such as clopper-pearson intervals for prevalence as well as bootstrap confidence intervals using the bias corrected and accelerated method. Development of the package will continue throughout the coming months to include significance tests and better options for the functions themselves.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8

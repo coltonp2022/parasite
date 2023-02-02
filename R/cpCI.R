@@ -6,7 +6,11 @@
 #' @param conf Numerical, indicating the confidence level desired
 #' @param group Character, allows for grouping the data together and calculating intervals for each group
 #'
+<<<<<<< HEAD
 #' @return Returns an object in the form of a data frame that includes naive prevalence and confidence intervals. If group = T, a column consisting of your grouping variables will also be created.
+=======
+#' @return Returns an object in the form of a data frame that includes naive prevalence, and confidence intervals. If group = T, this data frame also includes a column with your original groups.
+>>>>>>> fe45a3d45c76b9b4a951884b903f0e8ff18c7928
 #'
 #' @export
 
