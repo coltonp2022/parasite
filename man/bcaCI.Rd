@@ -20,7 +20,7 @@ bcaCI(data, column, measure, conf = 0.95, r = 2000, group = NULL)
 \item{group}{Character, allows for grouping the data together and calculating intervals for each group}
 }
 \value{
-Returns an object in the form of a data frame that includes mean and confidence intervals. If group = T, a column with your grouping variables will also be returned within this data frame.
+Returns an object in the form of a data frame that includes mean and confidence intervals. If data is grouped using the group argument, a column with your grouping variables will also be returned within this data frame.
 }
 \description{
 This function allows you to calculate bootstrap confidence intervals using the bca method.
