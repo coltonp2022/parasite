@@ -16,7 +16,7 @@ cpCI(data, column, conf = 0.95, group = NULL)
 \item{group}{Character, allows for grouping the data together and calculating intervals for each group}
 }
 \value{
-Returns an object in the form of a data frame that includes naive prevalence and confidence intervals. If group = T, a column consisting of your grouping variables will also be created.
+Returns an object in the form of a data frame that includes naive prevalence, and confidence intervals. If group = T, this data frame also includes a column with your original groups.
 }
 \description{
 This function allows you to calculate Clopper-Pearson confidence intervals.

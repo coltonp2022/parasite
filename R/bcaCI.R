@@ -9,11 +9,7 @@
 #' @param group Character, allows for grouping the data together and calculating intervals for each group
 #'
 #'
-<<<<<<< HEAD
-#' @return Returns an object in the form of a data frame that includes mean value and confidence intervals. If group = T, a column with your grouping variables will also be created.
-=======
 #' @return Returns an object in the form of a data frame that includes mean and confidence intervals. If group = T, a column with your grouping variables will also be returned within this data frame.
->>>>>>> fe45a3d45c76b9b4a951884b903f0e8ff18c7928
 #'
 #' @export
 
