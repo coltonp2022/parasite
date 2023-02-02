@@ -10,6 +10,7 @@
 #'
 #' @import dplyr
 #' @import PropCIs
+#' @import magrittr
 #'
 #' @export
 

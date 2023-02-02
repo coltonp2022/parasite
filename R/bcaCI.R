@@ -13,6 +13,7 @@
 #'
 #' @import dplyr
 #' @import boot
+#' @import magrittr
 #'
 #' @export
 

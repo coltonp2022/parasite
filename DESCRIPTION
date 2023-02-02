@@ -15,5 +15,6 @@ BugReports: https://github.com/coltonp2022/parasite/issues
 Imports: 
     boot,
     dplyr,
+    magrittr,
     PropCIs,
     readr
