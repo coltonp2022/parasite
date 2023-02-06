@@ -6,6 +6,9 @@
 \usage{
 X2test(data, column, group, simulate.p.value = FALSE, B = 2000)
 }
+\arguments{
+\item{data}{An input data frame consisting of at least binomial (0 or 1) parasitism data and a grouping variable column.}
+}
 \description{
 Takes input data in the form of a data frame, manipulates that data, and then runs the chisq.test() function for specified groups.
 }
