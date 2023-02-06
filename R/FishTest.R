@@ -63,7 +63,7 @@ FishTest <- function(data,
                  B = B) # Run the fisher exact test
 
   # Reset the value for the dataframe name
-  df[[length(df)]] <- deparse(substitute(data))
+  df[["data.name"]] <- deparse(substitute(data))
 
   # View the df at the end
   print(df)
