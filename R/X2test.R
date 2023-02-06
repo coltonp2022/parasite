@@ -2,6 +2,9 @@
 #'
 #' Takes input data in the form of a data frame, manipulates that data, and then runs the chisq.test() function for specified groups.
 #'
+#'
+#'
+#' @import
 
 
 X2test <- function(data,
@@ -24,13 +27,13 @@ X2test <- function(data,
     stop("Column must be a character value (i.e. 'yourgroupnamehere')")
   }
 
-  # Now start functions
+  # Now restructure data and run chisq.test()
   data <- data %>%
-    dplyr::select(.data[[group]], .data[[column]]) %>%
-    dplyr::count(.data[[group]], .data[[column]]) %>%
-    tidyr::spread(., key = group, value = "n") %>%
-    as.matrix() %>%
-    chisq.test(.)
+    dplyr::select(.data[[group]], .data[[column]]) %>% # Select needed columns
+    dplyr::count(.data[[group]], .data[[column]]) %>% # Use the count function to get n
+    tidyr::spread(., key = group, value = "n") %>% # Spread the data to wide
+    as.matrix() %>% # Make this data a matrix
+    chisq.test(.) # Run the chisq.test() function
 
   # Reset the value for the dataframe name
   data[["data.name"]] <- deparse(substitute(rodent))
