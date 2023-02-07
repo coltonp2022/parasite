@@ -4,20 +4,20 @@
 \alias{bcaCI}
 \title{Calculate bca bootstrap confidence intervals}
 \usage{
-bcaCI(data, column, measure, conf = 0.95, r = 2000, group = NULL)
+bcaCI(data, column, group = NULL, measure = "int", conf = 0.95, r = 2000)
 }
 \arguments{
 \item{data}{A data frame with parasite data}
 
 \item{column}{Character, indicating the column of parasite intensity data where values are >= 0}
 
+\item{group}{Character, allows for grouping the data together and calculating intervals for each group}
+
 \item{measure}{Character, indicating either abundance ("abun") or intensity ("int") to be used for calculation}
 
 \item{conf}{Numerical, indicating the confidence level desired}
 
 \item{r}{Numerical, indicated the number of replicates for the bootstrapping function}
-
-\item{group}{Character, allows for grouping the data together and calculating intervals for each group}
 }
 \value{
 Returns an object in the form of a data frame that includes mean and confidence intervals. If data is grouped using the group argument, a column with your grouping variables will also be returned within this data frame.

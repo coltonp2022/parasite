@@ -17,10 +17,10 @@
 
 bcaCI <- function(data,
                   column,
-                  measure,
+                  group = NULL,
+                  measure = "int",
                   conf = 0.95,
-                  r = 2000,
-                  group = NULL){
+                  r = 2000){
 
   # Data
   if(!is.data.frame(data)){
@@ -62,7 +62,7 @@ bcaCI <- function(data,
 
     # Now get all the estimates and make a dataframe
     final_df <- data.frame(
-      Mean = df1$t0,
+      Measure = df1$t0,
       Lower = df1$bca[4],
       Upper = df1$bca[5]
     )
@@ -92,7 +92,7 @@ bcaCI <- function(data,
       # Now get all the estimates and make a dataframe
       df2 <- data.frame(
         Group = unique(df[2])[i,],
-        Mean = df1$t0,
+        Measure = df1$t0,
         Lower = df1$bca[4],
         Upper = df1$bca[5]
       )
