@@ -38,6 +38,10 @@ FishTest <- function(data,
     stop("Column must be in character form (i.e. 'flea')")
   }
 
+  if(!is.numeric(data %>% pull(column))){
+    stop("Input parasite presence values must be numerical (0 or 1)")
+  }
+
   # Group
   if(!is.character(group)){
     stop("Group must be in character form (i.e. 'fire')")

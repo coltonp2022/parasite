@@ -1,4 +1,4 @@
-#' Bootstrapped 2-sample t-test for means
+#' Bootstrapped 2-sample t-test for mean abundance or intensity
 #'
 #' Takes normal input data and calculates a bootstrap two-sample t-test from that data to test for differences in means
 #'
@@ -17,6 +17,10 @@ boot2samp_t_test <- function(data,
   # Column
   if(!is.character(column)){
     stop("Input must be a character (i.e. 'intensity'")
+  }
+
+  if(!is.numeric(data %>% pull(column))){
+    stop("Input parasite intensities must be numerical")
   }
 
   # Group

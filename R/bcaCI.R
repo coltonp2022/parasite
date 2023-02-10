@@ -11,8 +11,6 @@
 #'
 #' @return Returns an object in the form of a data frame that includes mean and confidence intervals. If data is grouped using the group argument, a column with your grouping variables will also be returned within this data frame.
 #'
-#' @import magrittr
-#'
 #' @export
 
 bcaCI <- function(data,
@@ -23,13 +21,17 @@ bcaCI <- function(data,
                   r = 2000){
 
   # Data
-  if(!is.data.frame(data)){
-    stop("Input must be a data frame")
+  if(!inherits(data, c("tbl", "tbl_df", "data.frame"))){
+    stop("Input must be of classes 'tbl', 'tbl_df', or 'data.frame'")
   }
 
   # Column
   if(!is.character(column)){
     stop("Column must be a character. For example 'flea_intensity' ")
+  }
+
+  if(!is.numeric(data %>% pull(column))){
+    stop("Input parasite intensities must be numerical")
   }
 
   # Confidence
@@ -38,14 +40,8 @@ bcaCI <- function(data,
   }
 
   # Abundance or Intensity
-  if(measure == "abun"){
-    data <- data
-  }
-  else if(measure == "int"){
+  if(measure == "int"){
     data <- data %>% dplyr::filter(.data[[column]] > 0)
-  }
-  else{
-    stop("Input must be either 'abun' or 'int'")
   }
 
   # Run without grouping
@@ -105,6 +101,4 @@ bcaCI <- function(data,
     return(final_df)
   }
 }
-
-
 

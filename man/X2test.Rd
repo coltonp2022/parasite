@@ -8,6 +8,17 @@ X2test(data, column, group, simulate.p.value = FALSE, B = 2000)
 }
 \arguments{
 \item{data}{An input data frame consisting of at least binomial (0 or 1) parasitism data and a grouping variable column.}
+
+\item{column}{Character, indicating the column of parasite presence data.}
+
+\item{group}{Character, indicating the column name of the grouping variable column}
+
+\item{simulate.p.value}{Logical, indicating whether to compute p-values by Monte Carlo simulation. Passed to chisq.test().}
+
+\item{B}{Numerical, specifying the number of replicates used for the Monte Carlo test}
+}
+\value{
+Returns the same data as the chisq.test() function. See documentation for descriptions.
 }
 \description{
 Takes input data in the form of a data frame, manipulates that data, and then runs the chisq.test() function for specified groups.

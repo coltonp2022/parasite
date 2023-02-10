@@ -2,7 +2,7 @@
 % Please edit documentation in R/boot2samp_t_test.R
 \name{boot2samp_t_test}
 \alias{boot2samp_t_test}
-\title{Bootstrapped 2-sample t-test for means}
+\title{Bootstrapped 2-sample t-test for mean abundance or intensity}
 \usage{
 boot2samp_t_test(data, column, group, alternative = "two.sided", r = 2000)
 }

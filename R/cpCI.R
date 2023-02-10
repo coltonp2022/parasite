@@ -8,20 +8,23 @@
 #'
 #' @return Returns an object in the form of a data frame that includes naive prevalence, and confidence intervals. If data is grouped using the group argument, this data frame also includes a column with your original groups.
 #'
-#' @import magrittr
 #'
 #' @export
 
 cpCI <- function(data, column, conf = 0.95, group = NULL){
 
-  # Data type
-  if(!is.data.frame(data)){
-    stop("Input must be a data frame")
+  # Data
+  if(!inherits(data, c("tbl", "tbl_df", "data.frame"))){
+    stop("Input must be of classes 'tbl', 'tbl_df', or 'data.frame'")
   }
 
   # Column
   if(!is.character(column)){
     stop("Column must be a character. For example 'flea_presence'")
+  }
+
+  if(!is.numeric(data %>% pull(column))){
+    stop("Input parasite presence values must be numerical (0 or 1)")
   }
 
   # Confidence
