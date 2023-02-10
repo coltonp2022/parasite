@@ -1,14 +1,18 @@
 #' Calculate Mean Crowding and BCa Confidence Intervals
 #'
-#' @description Calculates parasite crowding from normal host parasite intensity or abundance data.
+#' @description Calculates parasite crowding as defined by Reiczigel et al. 2005 from normal host parasite intensity data. This is the same crowding index as what is used in QPweb.
 #'
-#' @param data A `data frame` consisting of at least one column of parasite intensity
-#' @param column Character, indicating the name of the column of parasite intensity
+#' @param data A data frame (`"tbl", "tbl_df", "data.frame"`) consisting of at least one column of parasite intensity values
+#' @param column Character, indicating the name of the column of parasite intensity values
 #' @param r Numeric, Number of replicates to use within the BCa bootstrap
 #' @param conf Numeric, Confidence level for the BCa bootstrap.
-#' @param group Character, indicating the name of the column that contains different groups within your data. Ex. 'sex', 'fire', 'age'.
+#' @param group Character, indicating the name of the column that contains different groups within your data. Ex. `"sex"`, `"fire"`, `"age"`.
+#'
+#' @format `data` "tbl", "tbl_df", or "data.frame"
 #'
 #' @return Returns a data frame object with three columns: mean crowding, lower and upper limits of the confidence interval.
+#'
+#'
 #'
 #' @export
 

@@ -3,23 +3,26 @@
 \name{QPcrowding}
 \alias{QPcrowding}
 \title{Calculate Mean Crowding and BCa Confidence Intervals}
+\format{
+\code{data} "tbl", "tbl_df", or "data.frame"
+}
 \usage{
 QPcrowding(data, column, r = 5000, conf = 0.95, group = NULL)
 }
 \arguments{
-\item{data}{A \verb{data frame} consisting of at least one column of parasite intensity}
+\item{data}{A data frame (\verb{"tbl", "tbl_df", "data.frame"}) consisting of at least one column of parasite intensity values}
 
-\item{column}{Character, indicating the name of the column of parasite intensity}
+\item{column}{Character, indicating the name of the column of parasite intensity values}
 
 \item{r}{Numeric, Number of replicates to use within the BCa bootstrap}
 
 \item{conf}{Numeric, Confidence level for the BCa bootstrap.}
 
-\item{group}{Character, indicating the name of the column that contains different groups within your data. Ex. 'sex', 'fire', 'age'.}
+\item{group}{Character, indicating the name of the column that contains different groups within your data. Ex. \code{"sex"}, \code{"fire"}, \code{"age"}.}
 }
 \value{
 Returns a data frame object with three columns: mean crowding, lower and upper limits of the confidence interval.
 }
 \description{
-Calculates parasite crowding from normal host parasite intensity or abundance data.
+Calculates parasite crowding as defined by Reiczigel et al. 2005 from normal host parasite intensity data. This is the same crowding index as what is used in QPweb.
 }
