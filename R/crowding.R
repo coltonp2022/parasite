@@ -100,26 +100,3 @@ crowding <- function(data,
   }
   return(final_df)
 }
-
-crowding(rodent, "num_flea")
-
-# Create a crowding data set
-df <- do.call(c, lapply(1:length(rodent[["num_flea"]]), function(i){
-  d <- rep(rodent[["num_flea"]][i], times = rodent[["num_flea"]][i])
-  return(d)
-}))
-
-  # Now lets calculate a bca bootstrap for crowding
-  df1 <- boot::boot(data = df, # Use that crowding df
-                    statistic = function(x, i) mean(x[i]), # Statistic is the mean
-                    R = 5000) %>% # Bootstrap 2000 times
-    boot::boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
-                  type = "bca",
-                  conf = 0.95) # Use the bias corrected and accelerated bootstrap
-
-  # Now get all the estimates and make a dataframe
-  final_df <- data.frame(
-    Mean = df1$t0,
-    Lower = df1$bca[4],
-    Upper = df1$bca[5]
-  )
