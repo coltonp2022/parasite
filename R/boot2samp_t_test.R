@@ -1,6 +1,6 @@
 #' Bootstrapped 2-sample t-test for means
 #'
-#' Takes normal input data and calculates a bootstrap two-sample t-test from that data to test for differences in means or medians
+#' Takes normal input data and calculates a bootstrap two-sample t-test from that data to test for differences in means
 #'
 #'
 

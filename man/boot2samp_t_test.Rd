@@ -7,5 +7,5 @@
 boot2samp_t_test(data, column, group, alternative = "two.sided", r = 2000)
 }
 \description{
-Takes normal input data and calculates a bootstrap two-sample t-test from that data to test for differences in means or medians
+Takes normal input data and calculates a bootstrap two-sample t-test from that data to test for differences in means
 }
