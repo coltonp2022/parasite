@@ -2,10 +2,13 @@
 % Please edit documentation in R/crowding.R
 \name{crowding}
 \alias{crowding}
-\title{Calculate Mean Crowding and Confidence Intervals}
+\title{Calculate Mean Crowding and BCa Confidence Intervals}
 \usage{
 crowding(data, column, r = 2000, conf = 0.95, group = NULL)
 }
+\arguments{
+\item{data}{A \enph{data frame} consisting of at least one column of parasite intensity or abundance data}
+}
 \description{
-Calculate Mean Crowding and Confidence Intervals
+Calculates parasite crowding from normal host parasite intensity or abundance data.
 }

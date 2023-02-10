@@ -1,6 +1,10 @@
-#' Calculate Mean Crowding and Confidence Intervals
+#' Calculate Mean Crowding and BCa Confidence Intervals
 #'
+#' Calculates parasite crowding from normal host parasite intensity or abundance data.
 #'
+#' @param data A \enph{data frame} consisting of at least one column of parasite intensity or abundance data
+#'
+
 
 crowding <- function(data,
                      column,
@@ -12,14 +16,25 @@ crowding <- function(data,
     stop("Data must be class 'tbl', 'tbl_df', or 'data.frame'")
   }
 
+  # Make the input a dataframe
+  if(inherits(data, c("tbl", "tbl_df"))){
+    data <- as.data.frame(data)
+  }
+
   # Column
   if(!is.character(column)){
     stop("Column name must be a character i.e. 'num_parasites'")
   }
 
-  # Make the input a dataframe
-  if(inherits(data, c("tbl", "tbl_df"))){
-    data <- as.data.frame(data)
+  if(!is.numeric(data[,column])){
+    stop("Input parasitism data must be numeric form")
+  }
+
+  # Group
+  if(!is.null(group)){
+    if(!is.character(group)){
+      stop("Group name must be a character i.e. 'sex'")
+    }
   }
 
   # Create a crowding data set
@@ -70,11 +85,12 @@ crowding <- function(data,
 
       # Now get all the estimates and make a dataframe
       df3 <- data.frame(
-        Group = unique(df[2])[i,],
+        column = unique(df[2])[i,],
         Measure = df2$t0,
         Lower = df2$bca[4],
         Upper = df2$bca[5]
       )
+      colnames(df3)[1] <- paste0(group)
 
       # Now return this df
       return(df3)
