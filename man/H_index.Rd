@@ -6,6 +6,17 @@
 \usage{
 H_index(data, column, group = NULL, conf.int = FALSE, conf = 0.95, r = 2000)
 }
+\arguments{
+\item{data}{A data frame with parasite data}
+
+\item{column}{Character, indicating the column of parasite intensity data where values are >= 0}
+
+\item{group}{Character, allows for grouping the data together and calculating intervals for each group}
+
+\item{conf}{Numerical, indicating the confidence level desired}
+
+\item{r}{Numerical, indicated the number of replicates for the bootstrapping function}
+}
 \description{
 Calculates the Hoover index to quantify parasite aggregation.
 }
