@@ -3,9 +3,6 @@
 \name{QPcrowding}
 \alias{QPcrowding}
 \title{Calculate Mean Crowding and BCa Confidence Intervals}
-\format{
-\code{data} "tbl", "tbl_df", or "data.frame"
-}
 \usage{
 QPcrowding(data, column, r = 5000, conf = 0.95, group = NULL)
 }

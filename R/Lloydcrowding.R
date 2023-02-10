@@ -1,19 +1,19 @@
-#' Calculate Mean Crowding and BCa Confidence Intervals
+#' Calculate Lloyd's Mean Crowding and BCa Confidence Intervals
 #'
-#' Calculates parasite crowding from normal host parasite intensity or abundance data.
+#' Calculates mean crowding as defined by Lloyd 1967 from parasite intensity data.
 #'
-#' @param data A data frame consisting of at least one column of parasite intensity
+#' @param data A data frame (`"tbl", "tbl_df", "data.frame"`) consisting of at least one column of parasite intensity
 #' @param column Character, indicating the name of the column of parasite intensity
-#' @param r Numeric, Number of replicates to use within the BCa bootstrap
-#' @param conf Numeric, Confidence level for the BCa bootstrap.
-#' @param group Character, indicating the name of the column that contains different groups within your data. Ex. 'sex', 'fire', 'age'.
+#' @param r Numeric, number of replicates to use within the BCa bootstrap
+#' @param conf Numeric, confidence level for the BCa bootstrap.
+#' @param group Character, indicating the name of the column that contains different groups within your data. Ex. `"sex", "fire", "age"`.
 #'
 #' @return Returns a data frame object with three columns: mean crowding, lower and upper limits of the confidence interval.
 #'
 #' @export
 
 
-crowding <- function(data,
+Lloydcrowding <- function(data,
                      column,
                      r = 5000,
                      conf = 0.95,
@@ -39,17 +39,16 @@ crowding <- function(data,
     }
   }
 
-  # Create a crowding data set
-  df <- do.call(c, lapply(1:length(data[[column]]), function(i){
-    d <- rep(data[[column]][i], times = data[[column]][i])
-    return(d)
-  }))
-
   if(is.null(group)){
+
     # Now lets calculate a bca bootstrap for crowding
-    df1 <- boot::boot(data = df, # Use that crowding df
-                      statistic = function(x, i) mean(x[i]), # Statistic is the mean
-                      R = r) %>% # Bootstrap 2000 times
+    df1 <- data %>%
+      pull(.data[[column]]) %>%
+      boot::boot(data = ., # Use that crowding df
+               statistic = function(x, i){
+                (mean(x[i])) + (var(x[i]) / mean(x[i])) - 1 # Statistic is the Lloyds mean crowding
+               },
+               R = r) %>% # Bootstrap 2000 times
       boot::boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
                     type = "bca",
                     conf = conf) # Use the bias corrected and accelerated bootstrap
@@ -69,17 +68,13 @@ crowding <- function(data,
     final_df <- do.call(rbind, lapply(1:nrow(unique(df[2])), function(i){
 
       # Filter the data to the group
-      dat <- data %>% filter(.data[[group]] == as.character(unique(df[2])[i,]))
-
-      # Create the crowding data set
-      df1 <- do.call(c, lapply(1:length(dat[[column]]), function(j){
-        d <- rep(dat[[column]][j], times = dat[[column]][j])
-        return(d)
-      }))
-
-      # Run the bootstrap in a pipe
-      df2 <- boot::boot(data = df1, # Use that column
-                   statistic = function(x, i) mean(x[i]), # Statistic is the mean
+      df2 <- data %>%
+        filter(.data[[group]] == as.character(unique(df[2])[i,])) %>%
+        pull(.data[[column]]) %>%
+        boot::boot(data = ., # Use that column
+                   statistic = function(x, i){
+                     (mean(x[i])) + (var(x[i]) / mean(x[i])) - 1 # Statistic is the Lloyd's mean crowding
+                   },
                    R = r) %>% # Bootstrap r times
         boot::boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
                       type = "bca", # Use the bias corrected and accelerated bootstrap

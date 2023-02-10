@@ -8,11 +8,7 @@
 #' @param conf Numeric, Confidence level for the BCa bootstrap.
 #' @param group Character, indicating the name of the column that contains different groups within your data. Ex. `"sex"`, `"fire"`, `"age"`.
 #'
-#' @format `data` "tbl", "tbl_df", or "data.frame"
-#'
 #' @return Returns a data frame object with three columns: mean crowding, lower and upper limits of the confidence interval.
-#'
-#'
 #'
 #' @export
 
