@@ -4,18 +4,18 @@
 \alias{Lloydcrowding}
 \title{Calculate Lloyd's Mean Crowding and BCa Confidence Intervals}
 \usage{
-Lloydcrowding(data, column, r = 5000, conf = 0.95, group = NULL)
+Lloydcrowding(data, column, group = NULL, conf = 0.95, r = 5000)
 }
 \arguments{
 \item{data}{A data frame (\verb{"tbl", "tbl_df", "data.frame"}) consisting of at least one column of parasite intensity}
 
 \item{column}{Character, indicating the name of the column of parasite intensity}
 
-\item{r}{Numeric, number of replicates to use within the BCa bootstrap}
+\item{group}{Character, indicating the name of the column that contains different groups within your data. Ex. \verb{"sex", "fire", "age"}.}
 
 \item{conf}{Numeric, confidence level for the BCa bootstrap.}
 
-\item{group}{Character, indicating the name of the column that contains different groups within your data. Ex. \verb{"sex", "fire", "age"}.}
+\item{r}{Numeric, number of replicates to use within the BCa bootstrap}
 }
 \value{
 Returns a data frame object with three columns: mean crowding, lower and upper limits of the confidence interval.

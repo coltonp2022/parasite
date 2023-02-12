@@ -4,18 +4,18 @@
 \alias{QPcrowding}
 \title{Calculate Mean Crowding and BCa Confidence Intervals}
 \usage{
-QPcrowding(data, column, r = 5000, conf = 0.95, group = NULL)
+QPcrowding(data, column, group = NULL, r = 5000, conf = 0.95)
 }
 \arguments{
 \item{data}{A data frame (\verb{"tbl", "tbl_df", "data.frame"}) consisting of at least one column of parasite intensity values}
 
 \item{column}{Character, indicating the name of the column of parasite intensity values}
 
+\item{group}{Character, indicating the name of the column that contains different groups within your data. Ex. \code{"sex"}, \code{"fire"}, \code{"age"}.}
+
 \item{r}{Numeric, Number of replicates to use within the BCa bootstrap}
 
 \item{conf}{Numeric, Confidence level for the BCa bootstrap.}
-
-\item{group}{Character, indicating the name of the column that contains different groups within your data. Ex. \code{"sex"}, \code{"fire"}, \code{"age"}.}
 }
 \value{
 Returns a data frame object with three columns: mean crowding, lower and upper limits of the confidence interval.

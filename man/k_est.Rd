@@ -4,7 +4,7 @@
 \alias{k_est}
 \title{Estimating the Negative Binomial Exponent, k}
 \usage{
-k_est(data, column, conf.int = NULL, conf = 0.975, rep = NULL, limit = 2000)
+k_est(data, column, conf = 0.975, limit = 2000)
 }
 \description{
 Estimating the Negative Binomial Exponent, k
