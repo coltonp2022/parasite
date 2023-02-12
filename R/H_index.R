@@ -2,7 +2,7 @@
 #'
 #' @description Calculates the Hoover index to quantify parasite aggregation.
 #'
-#' @inheritParams bcaCI
+#' @keywords internal
 #'
 
 
