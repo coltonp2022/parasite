@@ -4,7 +4,6 @@
 #'
 #' @inheritParams bcaCI
 #'
-#' @export
 
 
 H_index <- function(data,
