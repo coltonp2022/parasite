@@ -10,14 +10,13 @@
 #'
 #' @return Returns a data frame object with three columns: mean crowding, lower and upper limits of the confidence interval.
 #'
-#' @export
 
 
 QPcrowding <- function(data,
                      column,
+                     group = NULL,
                      r = 5000,
-                     conf = 0.95,
-                     group = NULL){
+                     conf = 0.95){
   # Data
   if(!inherits(data, c("tbl", "tbl_df", "data.frame"))){
     stop("Data must be class 'tbl', 'tbl_df', or 'data.frame'")
