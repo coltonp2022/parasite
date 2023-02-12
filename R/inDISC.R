@@ -1,7 +1,7 @@
 #' Poulin's Index of Discrepancy
 #'
 #'
-#'
+#' @noRd
 
 inDISC <- function(data,
                   column,

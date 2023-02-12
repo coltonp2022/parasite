@@ -1,6 +1,6 @@
 #' Estimating the Negative Binomial Exponent, k
 #'
-#'
+#' @noRd
 
 k_est <- function(data,
                   column,

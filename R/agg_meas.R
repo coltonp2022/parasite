@@ -1,5 +1,6 @@
 #' Aggregation Measures
 #'
+#' @export
 
 Agg_meas <- function(data,
                      column,

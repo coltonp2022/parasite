@@ -10,6 +10,7 @@
 #'
 #' @return Returns a data frame object with three columns: mean crowding, lower and upper limits of the confidence interval.
 #'
+#' @noRd
 
 
 QPcrowding <- function(data,
