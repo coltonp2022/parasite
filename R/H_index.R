@@ -2,7 +2,7 @@
 #'
 #' @description Calculates the Hoover index to quantify parasite aggregation.
 #'
-#' @keywords internal
+#' @noRd
 #'
 
 
