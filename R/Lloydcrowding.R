@@ -10,14 +10,13 @@
 #'
 #' @return Returns a data frame object with three columns: mean crowding, lower and upper limits of the confidence interval.
 #'
-#' @export
 
 
 Lloydcrowding <- function(data,
                      column,
-                     r = 5000,
+                     group = NULL,
                      conf = 0.95,
-                     group = NULL){
+                     r = 5000){
   # Data
   if(!inherits(data, c("tbl", "tbl_df", "data.frame"))){
     stop("Data must be class 'tbl', 'tbl_df', or 'data.frame'")
