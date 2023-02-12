@@ -10,7 +10,6 @@ inDISC <- function(data,
                   conf = 0.95,
                   r = 2000){
 
-
   # If group is NULL
   if(is.null(group)){
     # If confidence interval = FALSE
