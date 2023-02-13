@@ -46,21 +46,22 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
                 n = dplyr::n(), # Get a sample size
                 naive_prev = tot_parasite / n) # Calculate a Naive Prevalence
 
-    # Now create the Confidence intervals
-    df1 <- PropCIs::exactci(
-      df$tot_parasite, # Total parasites
-      df$n, # Total Sample Size
-      conf.level = conf # Confidence
-    )
+    # Now get your input parameters
+    alpha <- 1 - conf # Alpha
+    n <- df$n # Sample size
+    n1 <- df$tot_parasite # Number of "successes"
+    f1 <- qf(1 - alpha/2, (2 * n1), 2*(n - n1 + 1), lower.tail = F) # Actual lower coverage
+    f2 <- qf(alpha/2, 2*(n1 + 1), 2*(n - n1), lower.tail = F) # Actual upper coverage
 
-    # Now get the CI and Naive Prevalence into a vector
-    vector <- c(df$naive_prev, df1$conf.int)
+    # Now get the confidence intervals
+    pLow <- (1 + ((n - n1 + 1) / (n1 * f1))) ^ (-1)
+    pUpp <- (1 + ((n - n1)) / ((n1 + 1) * f2)) ^ (-1)
 
     # Now make a final df
     final_df <- data.frame(
-      Naive_Prev = vector[1],
-      Lower = vector[2],
-      Upper = vector[3]
+      Naive_Prev = df$naive_prev, # Mean prevalence
+      Lower = pLow, # Lower bound
+      Upper = pUpp # Upper bound
     )
 
     # Return
@@ -82,35 +83,29 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
       df1 <- df %>%
         dplyr::filter(.data[[group]] == as.character(unique(df[group])[i,]))
 
-      # Now create the Confidence intervals
-      df2 <- PropCIs::exactci(
-        df1$tot_parasite, # Total parasites
-        df1$n, # Total Sample Size
-        conf.level = conf # Confidence
-      )
+      # Now get your input parameters
+      alpha <- 1 - conf # Alpha
+      n <- df1$n # Sample size
+      n1 <- df1$tot_parasite # Number of "successes"
+      f1 <- qf(1 - alpha/2, (2 * n1), 2*(n - n1 + 1), lower.tail = F) # Actual lower coverage
+      f2 <- qf(alpha/2, 2*(n1 + 1), 2*(n - n1), lower.tail = F) # Actual upper coverage
 
-      # Now get the CI and Naive Prevalence into a vector
-      vector <- c(df1$naive_prev,
-                  df2$conf.int)
+      # Now get the confidence intervals
+      pLow <- (1 + ((n - n1 + 1) / (n1 * f1))) ^ (-1)
+      pUpp <- (1 + ((n - n1)) / ((n1 + 1) * f2)) ^ (-1)
 
       # Now make a final df
-      df3 <- data.frame(
-        Group = as.character(unique(df[group])[i,]),
-        Naive_Prev = vector[1],
-        Lower = vector[2],
-        Upper = vector[3]
+      df2 <- data.frame(
+        Group = unique(data[[group]][i]), # Grouping variable
+        Naive_Prev = df1$naive_prev, # Mean Prevalence
+        Lower = pLow, # Upper
+        Upper = pUpp # Lower
       )
-
-      return(df3)
+      colnames(df2)[1] <- group
+      return(df2)
     }))
 
     # Return
     return(final_df)
   }
 }
-
-
-
-
-
-
