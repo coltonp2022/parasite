@@ -16,7 +16,7 @@ H_index <- function(data,
   if(is.null(group)){
       # Calculate the hoover index using the bca bootstrap
       dat <- data %>% # Start with the data
-        pull(column) %>% # Pull the column into a vector
+        dplyr::pull(column) %>% # Pull the column into a vector
         boot::boot(., # Data from pipe
                    statistic = function(x, i){ # Hoover index function
                      do.call(sum, lapply(1:length(x[i]), function(j){
@@ -41,11 +41,11 @@ H_index <- function(data,
 
         # Get a new data frame
         dat <- data %>%
-          filter(.data[[group]] == unique(data[[group]])[i])
+          dplyr::filter(.data[[group]] == unique(data[[group]])[i])
 
         # Calculate the hoover index using the bca bootstrap
         dat1 <- dat %>%
-          pull(column) %>%
+          dplyr::pull(column) %>%
           boot::boot(.,
                      statistic = function(x, j){ # Hoover index function
                        do.call(sum, lapply(1:length(x[j]), function(k){

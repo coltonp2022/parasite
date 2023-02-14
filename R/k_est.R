@@ -11,7 +11,7 @@ k_est <- function(data,
   if(is.null(group)){
     # Create a dataset
     df1 <- data %>%
-      pull(.data[[column]]) # Pull the number of parasites column
+      dplyr::pull(.data[[column]]) # Pull the number of parasites column
 
     # Get point estimate of k
     k_point <- theta.ml(df1, mean(df1), length(df1), limit = 2000)
@@ -39,7 +39,7 @@ k_est <- function(data,
       # Create a dataset
       df1 <- data %>%
         dplyr::filter(.data[[group]] == unique(data[[group]])[i]) %>% # Subset
-        pull(.data[[column]]) # Pull the number of parasites column
+        dplyr::pull(.data[[column]]) # Pull the number of parasites column
 
       # Get point estimate of k
       k_point <- theta.ml(df1, mean(df1), length(df1), limit = 2000)

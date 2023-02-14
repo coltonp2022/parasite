@@ -18,10 +18,10 @@ blaker <- function(data,
                        naive_prev = tot_parasite / n) # Calculate a Naive Prevalence
 
     # Run the blakerci function
-    df1 <- blakerci(df$tot_parasite,
-                   df$n,
-                   conf.level = conf,
-                   tolerance = tolerance)
+    df1 <- PropCIs::blakerci(df$tot_parasite,
+                             df$n,
+                             conf.level = conf,
+                             tolerance = tolerance)
 
     # Now reformat the data into a DF
     out <- data.frame(
@@ -45,13 +45,13 @@ blaker <- function(data,
 
       # Subset the original df
       df1 <- df %>%
-        filter(.data[[group]] == unique(data[[group]])[i])
+        dplyr::filter(.data[[group]] == unique(data[[group]])[i])
 
       # Run the blakerci function
-      df2 <- blakerci(df1$tot_parasite,
-                      df1$n,
-                      conf.level = conf,
-                      tolerance = tolerance)
+      df2 <- PropCIs::blakerci(df1$tot_parasite,
+                               df1$n,
+                               conf.level = conf,
+                               tolerance = tolerance)
 
       # Now reformat the data into a DF
       df3 <- data.frame(

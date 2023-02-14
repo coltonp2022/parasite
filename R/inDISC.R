@@ -14,8 +14,8 @@ inDISC <- function(data,
 
       # Get the data and run the bootstrap
       out <- data %>%
-        pull(.data[[column]]) %>%
-        boot(.,
+        dplyr::pull(.data[[column]]) %>%
+        boot::boot(.,
              statistic = function(x, i){
                # Get the index
                do.call(sum, lapply(1:length(x[i]), function(j, k){
@@ -23,7 +23,7 @@ inDISC <- function(data,
                })) / (2 * (length(x[i]) ^ 2) * mean(x[i]))
              },
              R = r) %>%
-        boot.ci(.,
+        boot::boot.ci(.,
                 conf = conf,
                 type = "bca")
 
@@ -42,7 +42,7 @@ inDISC <- function(data,
         # Run the bootstrap
         out <- data %>%
           dplyr::filter(.data[[group]] == unique(data[[group]])[g]) %>%
-          pull(.data[[column]]) %>%
+          dplyr::pull(.data[[column]]) %>%
           boot(.,
                statistic = function(x, i){
                  # Get the index

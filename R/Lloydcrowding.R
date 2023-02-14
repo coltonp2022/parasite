@@ -43,7 +43,7 @@ Lloydcrowding <- function(data,
 
     # Now lets calculate a bca bootstrap for crowding
     df1 <- data %>%
-      pull(.data[[column]]) %>%
+      dplyr::pull(.data[[column]]) %>%
       boot::boot(data = ., # Use that crowding df
                statistic = function(x, i){
                 (mean(x[i])) + (var(x[i]) / mean(x[i])) - 1 # Statistic is the Lloyds mean crowding
@@ -69,8 +69,8 @@ Lloydcrowding <- function(data,
 
       # Filter the data to the group
       df2 <- data %>%
-        filter(.data[[group]] == as.character(unique(df[2])[i,])) %>%
-        pull(.data[[column]]) %>%
+        dplyr::filter(.data[[group]] == as.character(unique(df[2])[i,])) %>%
+        dplyr::pull(.data[[column]]) %>%
         boot::boot(data = ., # Use that column
                    statistic = function(x, i){
                      (mean(x[i])) + (var(x[i]) / mean(x[i])) - 1 # Statistic is the Lloyd's mean crowding

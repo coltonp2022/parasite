@@ -79,7 +79,7 @@ QPcrowding <- function(data,
     final_df <- do.call(rbind, lapply(1:nrow(unique(df[2])), function(i){
 
       # Filter the data to the group
-      dat <- data %>% filter(.data[[group]] == as.character(unique(df[2])[i,]))
+      dat <- data %>% dplyr::filter(.data[[group]] == as.character(unique(df[2])[i,]))
 
       # Create the crowding data set
       df1 <- do.call(c, lapply(1:length(dat[[column]]), function(j){

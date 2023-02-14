@@ -18,12 +18,12 @@ stern <- function(data,
                        naive_prev = tot_parasite / n) # Calculate a Naive Prevalence
 
     # Run the binom.exact function
-    df1 <- binom.exact(df$tot_parasite,
-                    df$n,
-                    p = 0.5,
-                    alternative = alternative,
-                    tsmethod = method,
-                    conf.level = conf)
+    df1 <- exactci::binom.exact(df$tot_parasite,
+                                df$n,
+                                p = 0.5,
+                                alternative = alternative,
+                                tsmethod = method,
+                                conf.level = conf)
 
     # Now reformat the data into a DF
     out <- data.frame(
@@ -50,12 +50,12 @@ stern <- function(data,
         filter(.data[[group]] == unique(data[[group]])[i])
 
       # Run the binom.exact function
-      df2 <- binom.exact(df1$tot_parasite,
-                         df1$n,
-                         p = 0.5,
-                         alternative = alternative,
-                         tsmethod = method,
-                         conf.level = conf)
+      df2 <- exactci::binom.exact(df1$tot_parasite,
+                                  df1$n,
+                                  p = 0.5,
+                                  alternative = alternative,
+                                  tsmethod = method,
+                                  conf.level = conf)
 
       # Now reformat the data into a DF
       df3 <- data.frame(
