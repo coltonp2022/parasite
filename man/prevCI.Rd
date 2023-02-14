@@ -4,7 +4,14 @@
 \alias{prevCI}
 \title{Prevalence Confidence Intervals}
 \usage{
-prevCI(data, column, measure = "ClopPear", group = NULL, conf = 0.95)
+prevCI(
+  data,
+  column,
+  measure = c("ClopPear", "Blaker", "Stern"),
+  group = NULL,
+  conf = 0.95,
+  tolerance = 1e-05
+)
 }
 \description{
 Prevalence Confidence Intervals

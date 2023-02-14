@@ -71,4 +71,3 @@ stern <- function(data,
   return(out)
 }
 
-stern(rodent, "flea", group = "sex")

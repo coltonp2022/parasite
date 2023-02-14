@@ -106,7 +106,4 @@ prevCI <- function(data,
 
   }
 }
-rodent[nrow(rodent) + 1,] <- NA
-
-n <- (prevCI(rodent, "flea", group = "fire"))
 

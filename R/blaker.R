@@ -67,4 +67,3 @@ blaker <- function(data,
   return(out)
 }
 
-blaker(rodent, "flea", group = "sex")
