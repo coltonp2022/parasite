@@ -46,7 +46,7 @@ X2test <- function(data,
     chisq.test(., simulate.p.value = simulate.p.value, B = B) # Run the chisq.test() function
 
   # Reset the value for the dataframe name
-  data[["data.name"]] <- deparse(substitute(rodent))
+  data[["data.name"]] <- deparse(substitute(data))
 
   # Print
   print(data)

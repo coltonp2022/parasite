@@ -38,9 +38,17 @@ prevCI <- function(data,
     }
   }
 
+  # If any values in group are NA
+  if(!is.null(group)){
+    if(sum(is.na(data[[group]])) > 0){
+      message("NAs present in grouping column. These rows were removed for calculations.")
+      data <- data[!is.na(data[[group]]),]
+    }
+  }
+
   #If any values are NA
   if(sum(is.na(data[[column]])) > 0){
-    message("NAs present in parasite presence column. These values were removed for calculations.")
+    message("NAs present in parasite presence column. These rows were removed for calculations.")
     data <- data[!is.na(data[[column]]),]
   }
 

@@ -64,7 +64,8 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
     final_df <- data.frame(
       Naive_Prev = df$naive_prev, # Mean prevalence
       Lower = pLow, # Lower bound
-      Upper = pUpp # Upper bound
+      Upper = pUpp, # Upper bound
+      N = df$n # Sample Size
     )
 
     # Return
@@ -102,9 +103,9 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
         Group = unique(data[[group]])[i], # Grouping variable
         Naive_Prev = df1$naive_prev, # Mean Prevalence
         Lower = pLow, # Upper
-        Upper = pUpp # Lower
+        Upper = pUpp, # Lower
+        N = df1$n # Sample Size
       )
-      colnames(df2)[1] <- group
       return(df2)
     }))
 

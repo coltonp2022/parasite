@@ -40,7 +40,7 @@ inDISC <- function(data,
       index <- do.call(rbind, lapply(1:length(unique(data[[group]])), function(g){
 
         # Run the bootstrap
-        out <- rodent %>%
+        out <- data %>%
           dplyr::filter(.data[[group]] == unique(data[[group]])[g]) %>%
           pull(.data[[column]]) %>%
           boot(.,
