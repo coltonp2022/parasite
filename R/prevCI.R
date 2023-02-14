@@ -22,7 +22,7 @@ prevCI <- function(data,
     stop("Input parasite presence values must be numerical (0 or 1)")
   }
 
-  if(isTRUE(!any(rodent %>% pull(column) %in% c(0,1)))){
+  if(isTRUE(!any(data %>% pull(column) %in% c(0,1)))){
     stop("Input parasite presence values must only be 0 or 1")
   }
 

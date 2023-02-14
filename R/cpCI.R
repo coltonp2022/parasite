@@ -26,7 +26,7 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
     stop("Input parasite presence values must be numerical (0 or 1)")
   }
 
-  if(isTRUE(!any(rodent %>% pull(column) %in% c(0,1)))){
+  if(isTRUE(!any(data %>% pull(column) %in% c(0,1)))){
     stop("Input values must only be 0 or 1")
   }
 
