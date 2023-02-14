@@ -17,5 +17,6 @@ Imports:
 Depends: 
     boot,
     dplyr,
+    exactci,
     magrittr,
     PropCIs

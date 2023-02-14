@@ -4,9 +4,10 @@
 
 prevCI <- function(data,
                    column,
-                   measure = "ClopPear",
+                   measure = c("ClopPear", "Blaker", "Stern"),
                    group = NULL,
-                   conf = 0.95){
+                   conf = 0.95,
+                   tolerance = 1e-05){
 
   # Data
   if(!inherits(data, c("tbl", "tbl_df", "data.frame"))){
@@ -52,6 +53,14 @@ prevCI <- function(data,
     data <- data[!is.na(data[[column]]),]
   }
 
+  # If no parasitized individuals
+  if(sum(data %>% pull(column)) == 0){
+    stop("No parasitized individuals. All values for presence are 0.")
+  }
+
+  # Print confidence interval
+  message(paste0((conf * 100), "% Confidence Intervals"))
+
   # If length of measure > 1
   if(length(measure) > 1){
     list <- lapply(1:length(measure), function(i){
@@ -59,17 +68,45 @@ prevCI <- function(data,
              ClopPear = cpCI(data = data,
                              column = column,
                              conf = conf,
-                             group = group))
+                             group = group),
+             Blaker = blaker(data = data,
+                             column = column,
+                             conf = conf,
+                             group = group,
+                             tolerance = tolerance),
+             Stern = stern(data = data,
+                           column = column,
+                           group = group,
+                           conf = conf))
     })
+    names(list) <- measure
+    list <- lapply(list, function(x) x %>% mutate_if(is.numeric, round, 3))
+    return(list)
   }
 
   # If length measure = 1
   else{
     # Run the switch
-    return(switch(measure,
+    out <- switch(measure,
                   ClopPear = cpCI(data = data,
                                   column = column,
                                   conf = conf,
-                                  group = group)))
+                                  group = group),
+           Blaker = blaker(data = data,
+                           column = column,
+                           conf = conf,
+                           group = group,
+                           tolerance = tolerance),
+           Stern = stern(data = data,
+                         column = column,
+                         group = group,
+                         conf = conf))
+    # Now round the output
+    return(out %>% mutate_if(is.numeric, round, 3))
+
   }
 }
+rodent[nrow(rodent) + 1,] <- NA
+
+n <- (prevCI(rodent, "flea", group = "fire"))
+
