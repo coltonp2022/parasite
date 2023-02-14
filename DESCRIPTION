@@ -1,9 +1,9 @@
 Package: parasite
-Title: Calculate Standard Parasitology Measure
+Title: Calculate Standard Parasitology Measures
 Version: 1.0
 Authors@R: 
     person("Colton", "Padilla", , "coltonpadilla18@gmail.com", role = c("aut", "cre"))
-Description: This package allows for streamlined calculation of standard parasitology calculations within R. 
+Description: This package allows for streamlined calculation of standard parasitology measures within R. 
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
