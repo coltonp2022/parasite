@@ -7,7 +7,7 @@
 bcaCI(data, column, group = NULL, measure = "int", conf = 0.95, r = 2000)
 }
 \arguments{
-\item{data}{A data frame with parasite data}
+\item{data}{A data frame \verb{('tbl', 'tbl_df', or 'data.frame')} consisting of at least one column of parasite intensity data}
 
 \item{column}{Character, indicating the column of parasite intensity data where values are >= 0}
 

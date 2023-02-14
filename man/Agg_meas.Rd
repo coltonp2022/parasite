@@ -2,7 +2,7 @@
 % Please edit documentation in R/agg_meas.R
 \name{Agg_meas}
 \alias{Agg_meas}
-\title{Aggregation Measures}
+\title{Parasite Aggregation Measures}
 \usage{
 Agg_meas(
   data,
@@ -14,6 +14,24 @@ Agg_meas(
   limit = 2000
 )
 }
+\arguments{
+\item{data}{A data frame \verb{('tbl', 'tbl_df', or 'data.frame')} consisting of at least one column of parasite intensity values for each host.}
+
+\item{column}{Character, indicating the column consisting of parasite intensity values}
+
+\item{measure}{Character, indicating which measures to be calculated.}
+
+\item{group}{Character, indicating the column that data should be grouped by}
+
+\item{conf}{Numerical, indicating coverage of confidence intervals for these measures}
+
+\item{r}{Numerical, number of replicates for bootstrap resampling}
+
+\item{limit}{Numerical, passed into theta.ml() as maximum number of iterations for MLE.}
+}
+\value{
+If only a single measure is chosen, a data frame consisting of the estimate and confidence interval bound for the measure is returned. If multiple measures are chosen, returns a named_list of data frames structured as mentioned.
+}
 \description{
-Aggregation Measures
+\code{Agg_meas()} calculates multiple different metrics quantifying the aggregation of parasites within a host population.
 }

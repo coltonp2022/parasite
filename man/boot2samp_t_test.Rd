@@ -6,6 +6,20 @@
 \usage{
 boot2samp_t_test(data, column, group, alternative = "two.sided", r = 2000)
 }
+\arguments{
+\item{data}{A data frame \verb{('tbl', 'tbl_df', or 'data.frame')} consisting of at least one column of parasite intensity data}
+
+\item{column}{Character, indicating the column of parasite intensity data where values are >= 0}
+
+\item{group}{Character, indicating the column to group the data by for testing. Must be only two unique values for group.}
+
+\item{alternative}{Character, indicating the type of test to be conducted. Can be "two.sided", "greater", or "less".}
+
+\item{r}{Numerical, indicating the number of bootstrap replicates.}
+}
+\value{
+Returns a printed statement indicating the alternative hypothesis and p-value. Returns the value for the p-value if assigning to an object.
+}
 \description{
-Takes normal input data and calculates a bootstrap two-sample t-test from that data to test for differences in means
+Calculates a bootstrap two-sample t-test to test for differences in mean abundance or intensity
 }

@@ -1,6 +1,6 @@
 #' Chi-Squared Tests for Data Frames
 #'
-#' Takes input data in the form of a data frame, manipulates that data, and then runs the chisq.test() function for specified groups.
+#' @description Takes input data in the form of a data frame, manipulates that data, and then runs the chisq.test() function for specified groups.
 #'
 #' @param data An input data frame consisting of at least binomial (0 or 1) parasitism data and a grouping variable column.
 #' @param column Character, indicating the column of parasite presence data.
@@ -9,6 +9,7 @@
 #' @param B Numerical, specifying the number of replicates used for the Monte Carlo test
 #'
 #' @return Returns the same data as the chisq.test() function. See documentation for descriptions.
+#'
 #' @export
 
 

@@ -1,6 +1,6 @@
 #' Calculate Lloyd's Mean Crowding and BCa Confidence Intervals
 #'
-#' Calculates mean crowding as defined by Lloyd 1967 from parasite intensity data.
+#' @description Calculates mean crowding as defined by Lloyd 1967 from parasite intensity data.
 #'
 #' @param data A data frame (`"tbl", "tbl_df", "data.frame"`) consisting of at least one column of parasite intensity
 #' @param column Character, indicating the name of the column of parasite intensity

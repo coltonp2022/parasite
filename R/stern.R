@@ -1,6 +1,15 @@
 #' Stern Confidence Intervals
 #'
+#' @description Calculates confidence intervals as described by Stern (1954)
 #'
+#' @param data A data frame `('tbl', 'tbl_df', or 'data.frame')` that consists of at least one column of parasite presence datas in binomial form (0 or 1)
+#' @param column Character, indicating the column of parasite presence values
+#' @param group Character, indicating which column to group data by.
+#' @param alternative Character, indicating what type of test to run in binom.exact(). Is not important for the output.
+#' @param method Character, indicating the 'minlike' method within binom.exact() to get Stern confidence intervals
+#' @param conf Numerical, indicating coverage of the confidence interval
+#'
+#' @noRd
 
 stern <- function(data,
                   column,

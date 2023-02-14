@@ -1,13 +1,26 @@
 #' Prevalence Confidence Intervals
 #'
+#' @description `prevCI()` calculates 4 different types of confidence intervals for prevalence of parasites.
+#'
+#' @param data A data frame `('tbl', 'tbl_df', or 'data.frame')` that consists of at least one column of parasite presence datas in binomial form (0 or 1)
+#' @param column Character, indicating the column of parasite presence values
+#' @param method Character, indicating which which method or methods should be used to calculate CI for prevalence.
+#' @param group Character, indicating which column to group data by.
+#' @param conf Numerical, indicating coverage of the confidence interval
+#' @param tolerance Numerical, Value passed into `blakerci()` for tolerance of Blaker confidence intervals.
+#' @param correct Logical, indicating whether or not to apply continuity correction to Wilson score intervals.
+#'
+#' @return If only a single method is used, returns a data frame consisting of naive estimate, lower bound, and upper bound of prevalence. If multiple methods are specified, a list of data frames structured as mentioned is returned.
+#'
 #' @export
 
 prevCI <- function(data,
                    column,
-                   measure = c("ClopPear", "Blaker", "Stern"),
+                   method = c("ClopPear", "Blaker", "Stern", "Wilson"),
                    group = NULL,
                    conf = 0.95,
-                   tolerance = 1e-05){
+                   tolerance = 1e-05,
+                   correct = FALSE){
 
   # Data
   if(!inherits(data, c("tbl", "tbl_df", "data.frame"))){
@@ -23,7 +36,7 @@ prevCI <- function(data,
     stop("Input parasite presence values must be numerical (0 or 1)")
   }
 
-  if(isTRUE(!any(data %>% pull(column) %in% c(0,1)))){
+  if(isTRUE(!all(data %>% pull(column) %in% c(0,1)))){
     stop("Input parasite presence values must only be 0 or 1")
   }
 
@@ -58,13 +71,20 @@ prevCI <- function(data,
     stop("No parasitized individuals. All values for presence are 0.")
   }
 
+  # Correct
+  if(isFALSE(correct)){
+    message("Wilson Score Interval without continuity correction")
+  } else{
+    message("Wilson Score Interval with continuity correction")
+  }
+
   # Print confidence interval
   message(paste0((conf * 100), "% Confidence Intervals"))
 
-  # If length of measure > 1
-  if(length(measure) > 1){
-    list <- lapply(1:length(measure), function(i){
-      switch(measure[i],
+  # If length of method > 1
+  if(length(method) > 1){
+    list <- lapply(1:length(method), function(i){
+      switch(method[i],
              ClopPear = cpCI(data = data,
                              column = column,
                              conf = conf,
@@ -77,17 +97,22 @@ prevCI <- function(data,
              Stern = stern(data = data,
                            column = column,
                            group = group,
-                           conf = conf))
+                           conf = conf),
+             Wilson = Wilson(data = data,
+                             column = column,
+                             group = group,
+                             conf = conf,
+                             correct = correct))
     })
-    names(list) <- measure
+    names(list) <- method
     list <- lapply(list, function(x) x %>% mutate_if(is.numeric, round, 3))
     return(list)
   }
 
-  # If length measure = 1
+  # If length method = 1
   else{
     # Run the switch
-    out <- switch(measure,
+    out <- switch(method,
                   ClopPear = cpCI(data = data,
                                   column = column,
                                   conf = conf,
@@ -100,10 +125,14 @@ prevCI <- function(data,
            Stern = stern(data = data,
                          column = column,
                          group = group,
-                         conf = conf))
+                         conf = conf),
+           Wilson = Wilson(data = data,
+                           column = column,
+                           group = group,
+                           conf = conf,
+                           correct = correct))
     # Now round the output
     return(out %>% mutate_if(is.numeric, round, 3))
 
   }
 }
-

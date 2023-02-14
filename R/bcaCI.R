@@ -1,7 +1,8 @@
 #' Calculate bca bootstrap confidence intervals
 #'
-#' This function allows you to calculate bootstrap confidence intervals using the bca method.
-#' @param data A data frame with parasite data
+#' @description This function allows you to calculate bootstrap confidence intervals using the bca method.
+#'
+#' @param data A data frame `('tbl', 'tbl_df', or 'data.frame')` consisting of at least one column of parasite intensity data
 #' @param column Character, indicating the column of parasite intensity data where values are >= 0
 #' @param measure Character, indicating either abundance ("abun") or intensity ("int") to be used for calculation
 #' @param conf Numerical, indicating the confidence level desired

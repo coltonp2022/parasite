@@ -1,5 +1,13 @@
 #' Estimating the Negative Binomial Exponent, k
 #'
+#' @description Calculates both estimates and confidence intervals for the negative binomial exponent, k.
+#'
+#' @param data A data frame `('tbl', 'tbl_df', or 'data.frame')` consisting of at least one column of parasite intensity data for hosts
+#' @param column `Character`, indicating the column of parasite intensity values
+#' @param group `Character`, indicating the column that the data should be grouped by
+#' @param conf `Numerical`, indicating the coverage of the confidence interval.
+#' @param limit `Numerical`, maximum number of iterations for MLE
+#'
 #' @noRd
 
 k_est <- function(data,

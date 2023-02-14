@@ -7,12 +7,31 @@
 prevCI(
   data,
   column,
-  measure = c("ClopPear", "Blaker", "Stern"),
+  method = c("ClopPear", "Blaker", "Stern", "Wilson"),
   group = NULL,
   conf = 0.95,
-  tolerance = 1e-05
+  tolerance = 1e-05,
+  correct = FALSE
 )
 }
+\arguments{
+\item{data}{A data frame \verb{('tbl', 'tbl_df', or 'data.frame')} that consists of at least one column of parasite presence datas in binomial form (0 or 1)}
+
+\item{column}{Character, indicating the column of parasite presence values}
+
+\item{method}{Character, indicating which which method or methods should be used to calculate CI for prevalence.}
+
+\item{group}{Character, indicating which column to group data by.}
+
+\item{conf}{Numerical, indicating coverage of the confidence interval}
+
+\item{tolerance}{Numerical, Value passed into \code{blakerci()} for tolerance of Blaker confidence intervals.}
+
+\item{correct}{Logical, indicating whether or not to apply continuity correction to Wilson score intervals.}
+}
+\value{
+If only a single method is used, returns a data frame consisting of naive estimate, lower bound, and upper bound of prevalence. If multiple methods are specified, a list of data frames structured as mentioned is returned.
+}
 \description{
-Prevalence Confidence Intervals
+\code{prevCI()} calculates 4 different types of confidence intervals for prevalence of parasites.
 }

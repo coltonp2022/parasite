@@ -1,6 +1,9 @@
 #' Blaker Confidence Intervals
 #'
+#' @description Calculates blaker confidence intervals for parasite prevalence.
 #'
+#' @inheritParams prevCI
+#' @noRd
 
 blaker <- function(data,
                    column,

@@ -1,4 +1,16 @@
-#' Aggregation Measures
+#' Parasite Aggregation Measures
+#'
+#' @description `Agg_meas()` calculates multiple different metrics quantifying the aggregation of parasites within a host population.
+#'
+#' @param data A data frame `('tbl', 'tbl_df', or 'data.frame')` consisting of at least one column of parasite intensity values for each host.
+#' @param column Character, indicating the column consisting of parasite intensity values
+#' @param measure Character, indicating which measures to be calculated.
+#' @param group Character, indicating the column that data should be grouped by
+#' @param conf Numerical, indicating coverage of confidence intervals for these measures
+#' @param r Numerical, number of replicates for bootstrap resampling
+#' @param limit Numerical, passed into theta.ml() as maximum number of iterations for MLE.
+#'
+#' @return If only a single measure is chosen, a data frame consisting of the estimate and confidence interval bound for the measure is returned. If multiple measures are chosen, returns a named_list of data frames structured as mentioned.
 #'
 #' @export
 

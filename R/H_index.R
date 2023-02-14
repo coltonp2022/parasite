@@ -2,6 +2,13 @@
 #'
 #' @description Calculates the Hoover index to quantify parasite aggregation.
 #'
+#' @param data A data frame `('tbl', 'tbl_df', or 'data.frame')` consisting of at least one column of parasite intensity data for hosts
+#' @param column `Character`, indicating the column of parasite intensity values
+#' @param group `Character`, indicating the column that the data should be grouped by
+#' @param conf.int `Logical`, indicating whether or not to construct a confidence interval for the value.
+#' @param conf `Numerical`, indicating the coverage of the confidence interval.
+#' @param r `Numerical`, number of bootstrap replicates for confidence interval construction
+#'
 #' @noRd
 #'
 

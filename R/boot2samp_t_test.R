@@ -1,8 +1,16 @@
 #' Bootstrapped 2-sample t-test for mean abundance or intensity
 #'
-#' Takes normal input data and calculates a bootstrap two-sample t-test from that data to test for differences in means
+#' @description Calculates a bootstrap two-sample t-test to test for differences in mean abundance or intensity
 #'
+#' @param data A data frame `('tbl', 'tbl_df', or 'data.frame')` consisting of at least one column of parasite intensity data
+#' @param column Character, indicating the column of parasite intensity data where values are >= 0
+#' @param group Character, indicating the column to group the data by for testing. Must be only two unique values for group.
+#' @param alternative Character, indicating the type of test to be conducted. Can be "two.sided", "greater", or "less".
+#' @param r Numerical, indicating the number of bootstrap replicates.
 #'
+#' @return Returns a printed statement indicating the alternative hypothesis and p-value. Returns the value for the p-value if assigning to an object.
+#'
+#' @export
 
 boot2samp_t_test <- function(data,
                              column,
@@ -66,7 +74,7 @@ boot2samp_t_test <- function(data,
   # Now for two.sided
   if(alternative == "two.sided"){
    p_value <- round((1 - mean(abs(t.vect) > abs(t.est))), 3)
-   cat(paste0("Hypothesis: ",
+   message(paste0("Alternative Hypothesis: ",
                  cat[1], " != ", cat[2],
                  "\n\nP-value = ", p_value))
   }
@@ -74,7 +82,7 @@ boot2samp_t_test <- function(data,
   # Greater
   if(alternative == "greater"){
    p_value <- round((1 - mean(t.vect > t.est)), 3)
-   cat(paste0("Hypothesis: ",
+   message(paste0("Alternative Hypothesis: ",
                  cat[1], " > ", cat[2],
                  "\n\nP-value = ", p_value))
   }
@@ -82,11 +90,10 @@ boot2samp_t_test <- function(data,
   # Less
   if(alternative == "less"){
     p_value <- round((1 - mean(t.vect < t.est)), 3)
-    cat(paste("Hypothesis: ",
+    message(paste("Alternative Hypothesis: ",
                   cat[1], " < ", cat[2],
                   "\n\nP-value = ", p_value))
   }
 
   invisible(p_value)
 }
-
