@@ -6,6 +6,8 @@
 #' @param alternative Character, indicating the type of test passed to prop.test(). Is not important for confidence interval construction.
 #' @param conf Numerical, indicating coverage of the confidence interval
 #' @param correct Logical, indicating whether or not to apply continuity correction to Wilson score intervals.
+#'
+#' @noRd
 
 Wilson <- function(data,
                   column,
