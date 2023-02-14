@@ -9,7 +9,6 @@ Agg_meas(
   column,
   measure = c("k", "Hoover", "PoulinD", "QPcrowd", "Lloydcrowd"),
   group = NULL,
-  conf.int = FALSE,
   conf = 0.95,
   r = 2000,
   limit = 2000

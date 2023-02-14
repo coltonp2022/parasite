@@ -6,36 +6,14 @@
 inDISC <- function(data,
                   column,
                   group = NULL,
-                  conf.int = FALSE,
                   conf = 0.95,
                   r = 2000){
 
   # If group is NULL
   if(is.null(group)){
-    # If confidence interval = FALSE
-    if(!isTRUE(conf.int)){
-      # Bring in the data and restructure it
-      dat <- data %>%
-        dplyr::pull(.data[[column]])
-
-      # Now calculate the top
-      top <- do.call(sum, lapply(1:length(dat), function(i, j){
-        d <- abs(dat[i] - dat[j])
-      }))
-
-      # Now calculate the bottom
-      bottom <- (2 * length(dat) ^2) * mean(dat)
-
-      # Now calculate the Index of discrepancy
-      index <- top / bottom
-      return(index)
-    }
-
-    # If confidence interval = TRUE
-    else{
 
       # Get the data and run the bootstrap
-      index <- data %>%
+      out <- data %>%
         pull(.data[[column]]) %>%
         boot(.,
              statistic = function(x, i){
@@ -48,44 +26,22 @@ inDISC <- function(data,
         boot.ci(.,
                 conf = conf,
                 type = "bca")
-    }
+
+      # Format the index
+      index <- data.frame(
+        Mean = out$t0,
+        Lower = out$bca[4],
+        Upper = out$bca[5]
+      )
   }
   # If group is specified
   else {
-    # If confidence interval = FALSE
-    if(!isTRUE(conf.int)){
-
-      # Create a new df
-      index <- do.call(rbind, lapply(1:length(unique(data[[group]])), function(g){
-
-        # Bring in the data and restructure it
-        dat <- data %>%
-          dplyr::filter(.data[[group]] == unique(data[[group]][g])) %>%
-          dplyr::pull(.data[[column]])
-
-        # Now calculate the top
-        top <- do.call(sum, lapply(1:length(dat), function(i, j){
-          d <- abs(dat[i] - dat[j])
-        }))
-
-        # Now calculate the bottom
-        bottom <- (2 * length(dat) ^2) * mean(dat)
-
-        # Now calculate the Index of discrepancy
-        i <- top / bottom
-        return(i)
-      }))
-    }
-
-    # If confidence interval = TRUE
-    else{
-
       # Get values for each group
       index <- do.call(rbind, lapply(1:length(unique(data[[group]])), function(g){
 
         # Run the bootstrap
-        i <- rodent %>%
-          dplyr::filter(sex == unique(data[[group]])[g]) %>%
+        out <- rodent %>%
+          dplyr::filter(.data[[group]] == unique(data[[group]])[g]) %>%
           pull(.data[[column]]) %>%
           boot(.,
                statistic = function(x, i){
@@ -98,13 +54,17 @@ inDISC <- function(data,
           boot.ci(.,
                   conf = 0.95,
                   type = "bca")
+
+        # Format the index
+        i <- data.frame(
+          Group = unique(data[[group]])[g],
+          Mean = out$t0,
+          Lower = out$bca[4],
+          Upper = out$bca[5]
+        )
+        colnames(i)[1] <- group
         return(i)
       }))
-    }
   }
- return(index)
+  return(index)
 }
-
-
-
-

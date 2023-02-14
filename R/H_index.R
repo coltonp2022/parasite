@@ -14,14 +14,6 @@ H_index <- function(data,
                     r = 2000){
 
   if(is.null(group)){
-    if(!isTRUE(conf.int)){
-
-      # Calculate the hoover index
-      hoov <- do.call(sum, lapply(1:length(data[[column]]), function(i){
-        return(abs(data[[column]][i] - mean(data[[column]])))
-      })) / (2 * length(data[[column]]) * mean(data[[column]]))
-    } else{
-
       # Calculate the hoover index using the bca bootstrap
       dat <- data %>% # Start with the data
         pull(column) %>% # Pull the column into a vector
@@ -42,34 +34,7 @@ H_index <- function(data,
         Lower = dat$bca[4], # Lower CI
         Upper = dat$bca[5] # Upper CI
       )
-    }
   } else{
-    if(!isTRUE(conf.int)){
-
-      # Loop this through multiple dfs
-      hoov <- do.call(rbind, lapply(1:length(unique(data[[group]])), function(i){
-
-        # Get the data frames for each unique group
-        dat <- data %>%
-          filter(.data[[group]] == unique(data[[group]])[i])
-
-        # Calculate the hoover index
-        dat1 <- do.call(sum, lapply(1:length(dat[[column]]), function(j){
-          return(abs(dat[[column]][j] - mean(dat[[column]])))
-        })) / (2 * length(dat[[column]]) * mean(dat[[column]]))
-
-        # Now restructure
-        dat2 <- data.frame(
-          Group = unique(data[[group]])[i],
-          Mean = dat1
-        )
-        colnames(dat2)[1] <- group
-        return(dat2)
-      }))
-
-
-
-    } else{
 
       # Loop through multiple dfs
       hoov <- do.call(rbind, lapply(1:length(unique(data[[group]])), function(i){
@@ -102,7 +67,6 @@ H_index <- function(data,
         colnames(dat2)[1] <- group
         return(dat2)
       }))
-    }
   }
   return(hoov)
 }
