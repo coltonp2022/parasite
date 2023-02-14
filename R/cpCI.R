@@ -84,7 +84,7 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
 
       # Subset the dataframe
       df1 <- df %>%
-        dplyr::filter(.data[[group]] == as.character(unique(df[group])[i,]))
+        dplyr::filter(.data[[group]] == unique(data[[group]])[i])
 
       # Now get your input parameters
       alpha <- 1 - conf # Alpha
@@ -99,7 +99,7 @@ cpCI <- function(data, column, conf = 0.95, group = NULL){
 
       # Now make a final df
       df2 <- data.frame(
-        Group = unique(data[[group]][i]), # Grouping variable
+        Group = unique(data[[group]])[i], # Grouping variable
         Naive_Prev = df1$naive_prev, # Mean Prevalence
         Lower = pLow, # Upper
         Upper = pUpp # Lower
