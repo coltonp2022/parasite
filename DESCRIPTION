@@ -1,22 +1,20 @@
 Package: parasite
-Title: Package for calculating standard parasitology measures
+Title: Calculate Standard Parasitology Measure
 Version: 1.0
 Authors@R: 
-    person("Colton", "Padilla", , "coltonpadilla18@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: This package allows users to calculate standard parasitology measures such as clopper-pearson intervals for prevalence as well as bootstrap confidence intervals using the bias corrected and accelerated method. Development of the package will continue throughout the coming months to include significance tests and better options for the functions themselves.
+    person("Colton", "Padilla", , "coltonpadilla18@gmail.com", role = c("aut", "cre"))
+Description: This package allows for streamlined calculation of standard parasitology calculations within R. 
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://github.com/coltonp2022/parasite
-BugReports: https://github.com/coltonp2022/parasite/issues
-Imports: 
-    readr
 Depends: 
-    boot,
     dplyr,
+    magrittr
+Imports: 
+    boot,
     exactci,
-    magrittr,
-    PropCIs
+    PropCIs,
+    tibble,
+    tidyr
