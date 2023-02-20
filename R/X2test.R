@@ -39,7 +39,7 @@ X2test <- function(data,
   }
 
   # Now restructure data and run chisq.test()
-  data <- data %>%
+  test <- data %>%
     dplyr::select(.data[[group]], .data[[column]]) %>% # Select needed columns
     dplyr::count(.data[[group]], .data[[column]]) %>% # Use the count function to get n
     tidyr::spread(., key = group, value = "n") %>% # Spread the data to wide
@@ -47,10 +47,10 @@ X2test <- function(data,
     chisq.test(., simulate.p.value = simulate.p.value, B = B) # Run the chisq.test() function
 
   # Reset the value for the dataframe name
-  data[["data.name"]] <- deparse(substitute(data))
+  test[["data.name"]] <- deparse(substitute(data))
 
   # Print
-  print(data)
+  print(test)
 }
 
 
