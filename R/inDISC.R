@@ -51,7 +51,7 @@ inDISC <- function(data,
         out <- data %>%
           dplyr::filter(.data[[group]] == unique(data[[group]])[g]) %>%
           dplyr::pull(.data[[column]]) %>%
-          boot(.,
+          boot::boot(.,
                statistic = function(x, i){
                  # Get the index
                  do.call(sum, lapply(1:length(x[i]), function(j, k){
@@ -59,7 +59,7 @@ inDISC <- function(data,
                  })) / (2 * (length(x[i]) ^ 2) * mean(x[i]))
                },
                R = 2000) %>%
-          boot.ci(.,
+          boot::boot.ci(.,
                   conf = 0.95,
                   type = "bca")
 
