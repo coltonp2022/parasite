@@ -11,10 +11,12 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends: 
     dplyr,
-    magrittr
+    magrittr,
+    R (>= 2.10)
 Imports: 
     boot,
     exactci,
     PropCIs,
     tibble,
     tidyr
+LazyData: true
