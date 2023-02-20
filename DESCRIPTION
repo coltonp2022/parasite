@@ -16,6 +16,7 @@ Depends:
 Imports: 
     boot,
     exactci,
+    MASS,
     PropCIs,
     tibble,
     tidyr

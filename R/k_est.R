@@ -22,7 +22,7 @@ k_est <- function(data,
       dplyr::pull(.data[[column]]) # Pull the number of parasites column
 
     # Get point estimate of k
-    k_point <- theta.ml(df1, mean(df1), length(df1), limit = 2000)
+    k_point <- MASS::theta.ml(df1, mean(df1), length(df1), limit = 2000)
 
     # Get the zscore needed
     z <- qnorm(conf)
@@ -50,7 +50,7 @@ k_est <- function(data,
         dplyr::pull(.data[[column]]) # Pull the number of parasites column
 
       # Get point estimate of k
-      k_point <- theta.ml(df1, mean(df1), length(df1), limit = 2000)
+      k_point <- MASS::theta.ml(df1, mean(df1), length(df1), limit = 2000)
 
       # Get the zscore needed
       z <- qnorm(conf)
