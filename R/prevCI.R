@@ -72,9 +72,11 @@ prevCI <- function(data,
   }
 
   # Correct
-  if(isFALSE(correct)){
+  if(measure %in% "Wilson" & isFALSE(correct)){
     message("Wilson Score Interval without continuity correction")
-  } else{
+  }
+
+  if(measure %in% "Wilson" & isTRUE(correct)){
     message("Wilson Score Interval with continuity correction")
   }
 
