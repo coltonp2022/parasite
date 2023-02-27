@@ -12,6 +12,18 @@
 #'
 #' @return If only a single measure is chosen, a data frame consisting of the estimate and confidence interval bound for the measure is returned. If multiple measures are chosen, returns a named_list of data frames structured as mentioned.
 #'
+#' @examples
+#' data(sex)
+#'
+#' # Single measure no group
+#' Agg_meas(sex, "intensity", measure = "PoulinD")
+#'
+#' # Multiple Measures no group
+#' (Agg_meas(sex, "intensity", measure = c("Hoover", "PoulinD")))
+#'
+#' # Adding a group
+#' Agg_meas(sex, "intensity", measure = "PoulinD", group = "sex")
+#'
 #' @export
 
 Agg_meas <- function(data,
