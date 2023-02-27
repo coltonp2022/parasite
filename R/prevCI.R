@@ -84,11 +84,11 @@ prevCI <- function(data,
   }
 
   # Correct
-  if(method %in% "Wilson" & isFALSE(correct)){
+  if(any(method %in% "Wilson") & isFALSE(correct)){
     message("Wilson Score Interval without continuity correction")
   }
 
-  if(method %in% "Wilson" & isTRUE(correct)){
+  if(any(method %in% "Wilson") & isTRUE(correct)){
     message("Wilson Score Interval with continuity correction")
   }
 
