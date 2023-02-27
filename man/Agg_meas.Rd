@@ -35,3 +35,16 @@ If only a single measure is chosen, a data frame consisting of the estimate and 
 \description{
 \code{Agg_meas()} calculates multiple different metrics quantifying the aggregation of parasites within a host population.
 }
+\examples{
+data(sex)
+
+# Single measure no group
+Agg_meas(sex, "intensity", measure = "PoulinD")
+
+# Multiple Measures no group
+(Agg_meas(sex, "intensity", measure = c("Hoover", "PoulinD")))
+
+# Adding a group
+Agg_meas(sex, "intensity", measure = "PoulinD", group = "sex")
+
+}
