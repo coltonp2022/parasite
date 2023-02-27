@@ -42,13 +42,13 @@ This function takes normal input data and calculates p-values from Fisher's Exac
 data(sex)
 
 # Two sided test
-FishTest(sex, "intensity", group = "sex")
+FishTest(sex, "presence", group = "sex")
 
 # Greater than
-FishTest(sex, "intensity", group = "sex", alternative = "greater")
+FishTest(sex, "presence", group = "sex", alternative = "greater")
 
 # Less than
-FishTest(sex, "intensity", group = "sex", alternative = "less")
+FishTest(sex, "presence", group = "sex", alternative = "less")
 
 
 }
