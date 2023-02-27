@@ -13,6 +13,19 @@
 #'
 #' @return Returns the list object described within the fisher.test() function help page.
 #'
+#' @examples
+#' data(sex)
+#'
+#' # Two sided test
+#' FishTest(sex, "intensity", group = "sex")
+#'
+#' # Greater than
+#' FishTest(sex, "intensity", group = "sex", alternative = "greater")
+#'
+#' # Less than
+#' FishTest(sex, "intensity", group = "sex", alternative = "less")
+#'
+#'
 #' @export
 #'
 

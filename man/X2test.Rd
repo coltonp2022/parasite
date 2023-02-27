@@ -23,3 +23,8 @@ Returns the same data as the chisq.test() function. See documentation for descri
 \description{
 Takes input data in the form of a data frame, manipulates that data, and then runs the chisq.test() function for specified groups.
 }
+\examples{
+data(sex)
+X2test(sex, "presence", group = "sex")
+
+}

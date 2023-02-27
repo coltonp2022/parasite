@@ -10,6 +10,18 @@
 #'
 #' @return Returns a printed statement indicating the alternative hypothesis and p-value. Returns the value for the p-value if assigning to an object.
 #'
+#' @examples
+#' data(sex)
+#'
+#' # Two sided test
+#' boot2samp_t_test(sex, "intensity", group = "sex")
+#'
+#' # Greater than
+#' boot2samp_t_test(sex, "intensity", group = "sex", alternative = "greater")
+#'
+#' # Less than
+#' boot2samp_t_test(sex, "intensity", group = "sex", alternative = "less")
+#'
 #' @export
 
 boot2samp_t_test <- function(data,

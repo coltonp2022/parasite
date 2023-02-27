@@ -25,3 +25,16 @@ Returns an object in the form of a data frame that includes mean and confidence 
 \description{
 This function allows you to calculate bootstrap confidence intervals using the bca method.
 }
+\examples{
+data(sex)
+
+# Intensity
+bcaCI(sex, "intensity", measure = "int")
+
+# Abundance
+bcaCI(sex, "intensity", measure = "abun")
+
+# Add a group in
+bcaCI(sex, "intensity", group = "sex")
+
+}

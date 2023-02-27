@@ -10,6 +10,10 @@
 #'
 #' @return Returns the same data as the chisq.test() function. See documentation for descriptions.
 #'
+#' @examples
+#' data(sex)
+#' X2test(sex, "presence", group = "sex")
+#'
 #' @export
 
 

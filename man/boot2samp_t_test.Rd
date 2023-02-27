@@ -23,3 +23,16 @@ Returns a printed statement indicating the alternative hypothesis and p-value. R
 \description{
 Calculates a bootstrap two-sample t-test to test for differences in mean abundance or intensity
 }
+\examples{
+data(sex)
+
+# Two sided test
+boot2samp_t_test(sex, "intensity", group = "sex")
+
+# Greater than
+boot2samp_t_test(sex, "intensity", group = "sex", alternative = "greater")
+
+# Less than
+boot2samp_t_test(sex, "intensity", group = "sex", alternative = "less")
+
+}

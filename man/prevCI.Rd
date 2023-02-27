@@ -35,3 +35,16 @@ If only a single method is used, returns a data frame consisting of naive estima
 \description{
 \code{prevCI()} calculates 4 different types of confidence intervals for prevalence of parasites.
 }
+\examples{
+data(sex)
+
+# Only a single measure
+prevCI(sex, "presence", method = "ClopPear")
+
+# Multiple measures
+prevCI(sex, "presence", method = c("Blaker", "Stern"))
+
+# Add a group & get all measures
+(prevCI(sex, "presence", group = "sex"))
+
+}

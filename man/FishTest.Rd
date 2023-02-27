@@ -38,3 +38,17 @@ Returns the list object described within the fisher.test() function help page.
 \description{
 This function takes normal input data and calculates p-values from Fisher's Exact Test on your specified groups. If looking for greater or less hypotheses, then make sure you set your factor levels correctly. This function depends on the fisher.test() function from base R. See that function for some extra information.
 }
+\examples{
+data(sex)
+
+# Two sided test
+FishTest(sex, "intensity", group = "sex")
+
+# Greater than
+FishTest(sex, "intensity", group = "sex", alternative = "greater")
+
+# Less than
+FishTest(sex, "intensity", group = "sex", alternative = "less")
+
+
+}

@@ -12,6 +12,18 @@
 #'
 #' @return If only a single method is used, returns a data frame consisting of naive estimate, lower bound, and upper bound of prevalence. If multiple methods are specified, a list of data frames structured as mentioned is returned.
 #'
+#' @examples
+#' data(sex)
+#'
+#' # Only a single measure
+#' prevCI(sex, "presence", method = "ClopPear")
+#'
+#' # Multiple measures
+#' prevCI(sex, "presence", method = c("Blaker", "Stern"))
+#'
+#' # Add a group & get all measures
+#' (prevCI(sex, "presence", group = "sex"))
+#'
 #' @export
 
 prevCI <- function(data,
