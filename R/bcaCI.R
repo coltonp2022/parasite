@@ -79,10 +79,10 @@ bcaCI <- function(data,
       # Add groups with singular values back in
       data2 <- data2 %>%
         dplyr::distinct() %>%
-        dplyr::group_by(.data[[group]]) %>%
+        dplyr::group_by(.data2[[group]]) %>%
         dplyr::mutate(Lower = NA,
                       Upper = NA) %>%
-        dplyr::rename(Measure = .data[[column]])
+        dplyr::rename(Measure = .data2[[column]])
 
     }
   }
