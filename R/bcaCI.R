@@ -74,11 +74,11 @@ bcaCI <- function(data,
 
       # Get data together
       data2 <- data2 %>%
-        dplyr::select(.data2[[group]], .data2[[column]]) %>%
+        dplyr::select(.data[[group]], .data[[column]]) %>%
         dplyr::distinct() %>%
         dplyr::mutate(Lower = NA,
                       Upper = NA) %>%
-        dplyr::rename(Measure = .data2[[column]])
+        dplyr::rename(Measure = .data[[column]])
     }
   }
 
