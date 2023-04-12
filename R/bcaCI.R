@@ -57,18 +57,24 @@ bcaCI <- function(data,
     data <- data %>% dplyr::filter(.data[[column]] > 0)
   }
 
-  # Remove groups with only one value for intensity
-  group_check <- data %>%
-    dplyr::count(.data[[group]], .data[[column]]) %>%
-    dplyr::count(.data[[group]]) %>%
-    dplyr::filter(n == 1)
+  # Deal with groups with only a single value
+  if(is.null(group)){
 
-  if(nrow(group_check) > 0){
-    data2 <- data %>% dplyr::filter(.data[[group]] %in% group_check[,1])
-    data <- data %>% dplyr::filter(!.data[[group]] %in% group_check[,1])
-    warning(paste0("Confidence Intervals unable to be calculated for groups with singular values. CI's missing for Groups: ",
-                   paste(group_check[,1], collapse = ",")))
+    # Get a check
+    group_check <- data %>%
+      dplyr::count(.data[[group]], .data[[column]]) %>%
+      dplyr::count(.data[[group]]) %>%
+      dplyr::filter(n == 1)
+
+    # Now redo the data if group_check > 1
+    if(nrow(group_check) > 0){
+      data2 <- data %>% dplyr::filter(.data[[group]] %in% group_check[,1])
+      data <- data %>% dplyr::filter(!.data[[group]] %in% group_check[,1])
+      warning(paste0("Confidence Intervals unable to be calculated for groups with singular values. CI's missing for Groups: ",
+                     paste(group_check[,1], collapse = ",")))
+    }
   }
+
 
   # Run without grouping
   if(is.null(group)){
