@@ -127,7 +127,7 @@ bcaCI <- function(data,
       # Now get all the estimates and make a dataframe
       df2 <- data.frame(
         Group = unique(df[2])[i,],
-        Measure = df1$t0,
+        Mean = df1$t0,
         Lower = df1$bca[4],
         Upper = df1$bca[5]
       )
