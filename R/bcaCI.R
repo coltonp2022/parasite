@@ -78,7 +78,7 @@ bcaCI <- function(data,
         dplyr::distinct() %>%
         dplyr::mutate(Lower = NA,
                       Upper = NA) %>%
-        dplyr::rename(Measure = .data[[column]])
+        dplyr::rename(Mean = .data[[column]])
     }
   }
 
