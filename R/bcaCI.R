@@ -58,7 +58,7 @@ bcaCI <- function(data,
   }
 
   # Deal with groups with only a single value
-  if(group){
+  if(!is.null(group)){
     # Get a check
     group_check <- data %>%
       dplyr::count(.data[[group]], .data[[column]]) %>%
@@ -72,15 +72,13 @@ bcaCI <- function(data,
       warning(paste0("Confidence Intervals unable to be calculated for groups with singular values. CI's missing for Groups: ",
                      paste(group_check[,1], collapse = ",")))
 
-      if(group){
-        # Get data together
-        data2 <- data2 %>%
-          dplyr::select(.data2[[group]], .data2[[column]]) %>%
-          dplyr::distinct() %>%
-          dplyr::mutate(Lower = NA,
-                        Upper = NA) %>%
-          dplyr::rename(Measure = .data2[[column]])
-      }
+      # Get data together
+      data2 <- data2 %>%
+        dplyr::select(.data2[[group]], .data2[[column]]) %>%
+        dplyr::distinct() %>%
+        dplyr::mutate(Lower = NA,
+                      Upper = NA) %>%
+        dplyr::rename(Measure = .data2[[column]])
     }
   }
 
@@ -91,11 +89,11 @@ bcaCI <- function(data,
     df1 <- data %>%
       dplyr::pull(.data[[column]]) %>% # Pull the number of fleas column
       boot::boot(data = ., # Use that column
-           statistic = function(x, i) mean(x[i]), # Statistic is the mean
-           R = r) %>% # Bootstrap 2000 times
+                 statistic = function(x, i) mean(x[i]), # Statistic is the mean
+                 R = r) %>% # Bootstrap 2000 times
       boot::boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
-              type = "bca",
-              conf = conf) # Use the bias corrected and accelerated bootstrap
+                    type = "bca",
+                    conf = conf) # Use the bias corrected and accelerated bootstrap
 
     # Now get all the estimates and make a dataframe
     final_df <- data.frame(
@@ -120,11 +118,11 @@ bcaCI <- function(data,
         dplyr::filter(.data[[group]] == as.character(unique(df[2])[i,])) %>%
         dplyr::pull(.data[[column]]) %>% # Pull the number of parasites column
         boot::boot(data = ., # Use that column
-             statistic = function(x, i) mean(x[i]), # Statistic is the mean
-             R = r) %>% # Bootstrap r times
+                   statistic = function(x, i) mean(x[i]), # Statistic is the mean
+                   R = r) %>% # Bootstrap r times
         boot::boot.ci(boot.out = ., # Use that bootstrap sample for confidence intervals
-                type = "bca", # Use the bias corrected and accelerated bootstrap
-                conf = conf) # Set the confidence level
+                      type = "bca", # Use the bias corrected and accelerated bootstrap
+                      conf = conf) # Set the confidence level
 
       # Now get all the estimates and make a dataframe
       df2 <- data.frame(
@@ -146,4 +144,3 @@ bcaCI <- function(data,
     return(final_df)
   }
 }
-
