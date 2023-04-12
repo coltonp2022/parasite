@@ -65,7 +65,7 @@ bcaCI <- function(data,
       dplyr::count(.data[[group]]) %>%
       dplyr::filter(n == 1)
 
-    # Now redo the data if group_check > 1
+    # Now redo the data if group_check > 0
     if(nrow(group_check) > 0){
       data2 <- data %>% dplyr::filter(.data[[group]] %in% group_check[,1])
       data <- data %>% dplyr::filter(!.data[[group]] %in% group_check[,1])
@@ -136,7 +136,7 @@ bcaCI <- function(data,
       return(df2)
     }))
 
-    if(nrow(group_check) > 1){
+    if(nrow(group_check) > 0){
       # Rbind any missing data
       final_df <- rbind(final_df, data2) %>%
         dplyr::arrange(.data[[group]])
