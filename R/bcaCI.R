@@ -128,7 +128,7 @@ bcaCI <- function(data,
       return(df2)
     }))
 
-    if(nrow(group_check) > 0){
+    if(group & nrow(group_check) > 0){
       # Get two columns
       data2 <- data2 %>%
         dplyr::select(.data[[group]], .data[[column]])
