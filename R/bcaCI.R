@@ -72,14 +72,15 @@ bcaCI <- function(data,
       warning(paste0("Confidence Intervals unable to be calculated for groups with singular values. CI's missing for Groups: ",
                      paste(group_check[,1], collapse = ",")))
 
-      # Get data together
-      data2 <- data2 %>%
-        dplyr::select(.data2[[group]], .data2[[column]]) %>%
-        dplyr::distinct() %>%
-        dplyr::mutate(Lower = NA,
-                      Upper = NA) %>%
-        dplyr::rename(Measure = .data2[[column]])
-
+      if(group){
+        # Get data together
+        data2 <- data2 %>%
+          dplyr::select(.data2[[group]], .data2[[column]]) %>%
+          dplyr::distinct() %>%
+          dplyr::mutate(Lower = NA,
+                        Upper = NA) %>%
+          dplyr::rename(Measure = .data2[[column]])
+      }
     }
   }
 
