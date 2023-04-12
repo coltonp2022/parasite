@@ -71,6 +71,19 @@ bcaCI <- function(data,
       data <- data %>% dplyr::filter(!.data[[group]] %in% group_check[,1])
       warning(paste0("Confidence Intervals unable to be calculated for groups with singular values. CI's missing for Groups: ",
                      paste(group_check[,1], collapse = ",")))
+
+      # Get two columns
+      data2 <- data2 %>%
+        dplyr::select(.data[[group]], .data[[column]])
+
+      # Add groups with singular values back in
+      data2 <- data2 %>%
+        dplyr::distinct() %>%
+        dplyr::group_by(.data[[group]]) %>%
+        dplyr::mutate(Lower = NA,
+                      Upper = NA) %>%
+        dplyr::rename(Measure = .data[[column]])
+
     }
   }
 
@@ -128,24 +141,9 @@ bcaCI <- function(data,
       return(df2)
     }))
 
-    if(group & nrow(group_check) > 0){
-      # Get two columns
-      data2 <- data2 %>%
-        dplyr::select(.data[[group]], .data[[column]])
-
-      # Add groups with singular values back in
-      data2 <- data2 %>%
-        dplyr::distinct() %>%
-        dplyr::group_by(.data[[group]]) %>%
-        dplyr::mutate(Lower = NA,
-               Upper = NA) %>%
-        dplyr::rename(Measure = .data[[column]])
-
-      # Rbind
-      final_df <- rbind(final_df, data2) %>%
-        dplyr::arrange(.data[[group]])
-    }
-
+    # Rbind any missing data
+    final_df <- rbind(final_df, data2) %>%
+      dplyr::arrange(.data[[group]])
 
     # Now return that final df
     return(final_df)
