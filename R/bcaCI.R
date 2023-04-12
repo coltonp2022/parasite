@@ -136,9 +136,11 @@ bcaCI <- function(data,
       return(df2)
     }))
 
-    # Rbind any missing data
-    final_df <- rbind(final_df, data2) %>%
-      dplyr::arrange(.data[[group]])
+    if(nrow(group_check) > 1){
+      # Rbind any missing data
+      final_df <- rbind(final_df, data2) %>%
+        dplyr::arrange(.data[[group]])
+    }
 
     # Now return that final df
     return(final_df)
