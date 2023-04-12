@@ -57,6 +57,19 @@ bcaCI <- function(data,
     data <- data %>% dplyr::filter(.data[[column]] > 0)
   }
 
+  # Remove groups with only one value for intensity
+  group_check <- data %>%
+    dplyr::count(.data[[group]], .data[[column]]) %>%
+    dplyr::count(.data[[group]]) %>%
+    dplyr::filter(n == 1)
+
+  if(nrow(group_check) > 0){
+    data2 <- data %>% dplyr::filter(.data[[group]] %in% group_check[,1])
+    data <- data %>% dplyr::filter(!.data[[group]] %in% group_check[,1])
+    warning(paste0("Confidence Intervals unable to be calculated for groups with singular values. CI's missing for Groups: ",
+                   paste(group_check[,1], collapse = ",")))
+  }
+
   # Run without grouping
   if(is.null(group)){
     # Run the bootstrap in a pipe
@@ -109,6 +122,25 @@ bcaCI <- function(data,
       # Now return this df
       return(df2)
     }))
+
+    if(nrow(group_check) > 0){
+      # Get two columns
+      data2 <- data2 %>%
+        dplyr::select(.data[[group]], .data[[column]])
+
+      # Add groups with singular values back in
+      data2 <- data2 %>%
+        dplyr::distinct() %>%
+        dplyr::group_by(.data[[group]]) %>%
+        dplyr::mutate(Lower = NA,
+               Upper = NA) %>%
+        dplyr::rename(Measure = .data[[column]])
+
+      # Rbind
+      final_df <- rbind(final_df, data2) %>%
+        dplyr::arrange(.data[[group]])
+    }
+
 
     # Now return that final df
     return(final_df)
