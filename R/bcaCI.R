@@ -58,8 +58,7 @@ bcaCI <- function(data,
   }
 
   # Deal with groups with only a single value
-  if(is.null(group)){
-
+  if(!is.null(group)){
     # Get a check
     group_check <- data %>%
       dplyr::count(.data[[group]], .data[[column]]) %>%
