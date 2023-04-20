@@ -80,7 +80,7 @@ prevCI <- function(data,
 
   # If no parasitized individuals
   if(sum(data %>% pull(column)) == 0){
-    out <- data.frame(
+    out1 <- data.frame(
       Group = unique(data[group]),
       Naive_Prev = 0,
       Upper = NA,
@@ -153,7 +153,12 @@ prevCI <- function(data,
                            conf = conf,
                            correct = correct))
     # Now round the output
-    return(out %>% mutate_if(is.numeric, round, 3))
+    out <- out %>% mutate_if(is.numeric, round, 3)
 
+    # If no parasitized individuals
+    if(sum(data %>% pull(column)) == 0){
+      out <- rbind(out, out1)
+    }
+    return(out)
   }
 }
