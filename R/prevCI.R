@@ -51,14 +51,14 @@ prevCI <- function(data,
   # If any values in group are NA
   if(!is.null(group)){
     if(sum(is.na(data[[group]])) > 0){
-      message("NAs present in grouping column. These rows were removed for calculations.")
+      print("NAs present in grouping column. These rows were removed for calculations.")
       data <- data[!is.na(data[[group]]),]
     }
   }
 
   #If any values are NA
   if(sum(is.na(data[[column]])) > 0){
-    message("NAs present in parasite presence column. These rows were removed for calculations.")
+    print("NAs present in parasite presence column. These rows were removed for calculations.")
     data <- data[!is.na(data[[column]]),]
   }
 
@@ -81,10 +81,10 @@ prevCI <- function(data,
   # If no parasitized individuals
   if(sum(data %>% pull(column)) == 0){
     out1 <- data.frame(
-      Group = unique(data[group]),
+      Group = unique(data[[group]]),
       Naive_Prev = 0,
-      Lower = NA,
-      Upper = NA,
+      Lower = 0,
+      Upper = 1,
       N = nrow(data[!is.na(column),])
     )
     message("No parasitized individuals. All values for presence are 0.")
