@@ -83,8 +83,8 @@ prevCI <- function(data,
     out1 <- data.frame(
       Group = unique(data[group]),
       Naive_Prev = 0,
-      Upper = NA,
       Lower = NA,
+      Upper = NA,
       N = nrow(data[!is.na(column),])
     )
     message("No parasitized individuals. All values for presence are 0.")
