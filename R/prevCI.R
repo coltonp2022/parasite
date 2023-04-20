@@ -78,11 +78,6 @@ prevCI <- function(data,
     }
   }
 
-  # If no parasitized individuals
-  if(sum(data %>% pull(column)) == 0){
-    print("No parasitized individuals. All values for presence are 0.")
-  }
-
   # Correct
   if(any(method %in% "Wilson") & isFALSE(correct)){
     message("Wilson Score Interval without continuity correction")
@@ -94,6 +89,11 @@ prevCI <- function(data,
 
   # Print confidence interval
   message(paste0((conf * 100), "% Confidence Intervals"))
+
+  # If Group is null and all values for data are 0
+  if(is.null(group) & sum(data %>% pull(column))){
+    stop("All values for presence are 0")
+  }
 
   # If length of method > 1
   if(length(method) > 1){
