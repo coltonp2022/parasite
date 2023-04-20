@@ -48,6 +48,20 @@ prevCI <- function(data,
     stop("Input parasite presence values must be numerical (0 or 1)")
   }
 
+  # If any values in group are NA
+  if(!is.null(group)){
+    if(sum(is.na(data[[group]])) > 0){
+      message("NAs present in grouping column. These rows were removed for calculations.")
+      data <- data[!is.na(data[[group]]),]
+    }
+  }
+
+  #If any values are NA
+  if(sum(is.na(data[[column]])) > 0){
+    message("NAs present in parasite presence column. These rows were removed for calculations.")
+    data <- data[!is.na(data[[column]]),]
+  }
+
   if(isTRUE(!all(data %>% pull(column) %in% c(0,1)))){
     stop("Input parasite presence values must only be 0 or 1")
   }
@@ -62,20 +76,6 @@ prevCI <- function(data,
     if(!is.character(group)){
       stop("Group must be a character. For example 'sex' ")
     }
-  }
-
-  # If any values in group are NA
-  if(!is.null(group)){
-    if(sum(is.na(data[[group]])) > 0){
-      message("NAs present in grouping column. These rows were removed for calculations.")
-      data <- data[!is.na(data[[group]]),]
-    }
-  }
-
-  #If any values are NA
-  if(sum(is.na(data[[column]])) > 0){
-    message("NAs present in parasite presence column. These rows were removed for calculations.")
-    data <- data[!is.na(data[[column]]),]
   }
 
   # If no parasitized individuals
