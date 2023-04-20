@@ -81,7 +81,7 @@ prevCI <- function(data,
   # If no parasitized individuals
   if(sum(data %>% pull(column)) == 0){
     out <- data.frame(
-      Group = unique(data$group),
+      Group = unique(data[group]),
       Naive_Prev = 0,
       Upper = NA,
       Lower = NA,
