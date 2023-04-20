@@ -80,7 +80,14 @@ prevCI <- function(data,
 
   # If no parasitized individuals
   if(sum(data %>% pull(column)) == 0){
-    stop("No parasitized individuals. All values for presence are 0.")
+    out <- data.frame(
+      Group = unique(data$group),
+      Naive_Prev = 0,
+      Upper = NA,
+      Lower = NA,
+      N = nrow(data[!is.na(column),])
+    )
+    message("No parasitized individuals. All values for presence are 0.")
   }
 
   # Correct
