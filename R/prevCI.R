@@ -80,14 +80,7 @@ prevCI <- function(data,
 
   # If no parasitized individuals
   if(sum(data %>% pull(column)) == 0){
-    out1 <- data.frame(
-      Group = unique(data[[group]]),
-      Naive_Prev = 0,
-      Lower = "NA",
-      Upper = "NA",
-      N = nrow(data[!is.na(column),])
-    )
-    message("No parasitized individuals. All values for presence are 0.")
+    print("No parasitized individuals. All values for presence are 0.")
   }
 
   # Correct
@@ -154,11 +147,6 @@ prevCI <- function(data,
                            correct = correct))
     # Now round the output
     out <- out %>% mutate_if(is.numeric, round, 3)
-
-    # If no parasitized individuals
-    if(sum(data %>% pull(column)) == 0){
-      out <- rbind(out, out1)
-    }
     return(out)
   }
 }
