@@ -90,11 +90,6 @@ prevCI <- function(data,
   # Print confidence interval
   message(paste0((conf * 100), "% Confidence Intervals"))
 
-  # If Group is null and all values for data are 0
-  if(is.null(group) & sum(data %>% pull(column))){
-    stop("All values for presence are 0")
-  }
-
   # If length of method > 1
   if(length(method) > 1){
     list <- lapply(1:length(method), function(i){
