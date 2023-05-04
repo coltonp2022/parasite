@@ -52,6 +52,12 @@ bcaCI <- function(data,
     stop("Confidence must be numeric.")
   }
 
+  # Remove NAs in the data
+  if(any(is.na(data %>% pull(column)))){
+    print("NAs within parasite intensities. These values were removed for calculation")
+    data <- data %>% dplyr::filter(!is.na(.data[[column]]))
+  }
+
   # Abundance or Intensity
   if(measure == "int"){
     data <- data %>% dplyr::filter(.data[[column]] > 0)
