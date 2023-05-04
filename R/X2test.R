@@ -14,6 +14,9 @@
 #' data(sex)
 #' X2test(sex, "presence", group = "sex")
 #'
+#' @references
+#' Reiczigel, J., Abonyi-Tóth, Z. and Singer, J., 2008. An exact confidence set for two binomial proportions and exact unconditional confidence intervals for the difference and ratio of proportions. Computational Statistics & Data Analysis 52: 5046-5053.
+#'
 #' @export
 
 

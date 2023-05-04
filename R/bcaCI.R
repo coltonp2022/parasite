@@ -24,6 +24,9 @@
 #' # Add a group in
 #' bcaCI(sex, "intensity", group = "sex")
 #'
+#' @references
+#' Tibshirani, R.J. and Efron, B., 1993. An introduction to the bootstrap. Monographs on statistics and applied probability 57.
+#'
 #' @export
 
 bcaCI <- function(data,

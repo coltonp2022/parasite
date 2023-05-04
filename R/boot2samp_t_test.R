@@ -22,6 +22,9 @@
 #' # Less than
 #' boot2samp_t_test(sex, "intensity", group = "sex", alternative = "less")
 #'
+#' @references
+#' Tibshirani, R.J. and Efron, B., 1993. An introduction to the bootstrap. Monographs on statistics and applied probability 57.
+#'
 #' @export
 
 boot2samp_t_test <- function(data,

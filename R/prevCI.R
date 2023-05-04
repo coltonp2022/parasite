@@ -24,11 +24,18 @@
 #' # Add a group & get all measures
 #' (prevCI(sex, "presence", group = "sex"))
 #'
+#' @references
+#' Blaker, H., 2000. Confidence curves and improved exact confidence intervals for discrete distributions. Canadian Journal of Statistics 28: 783-798.
+#' Clopper, C.J. and Pearson, E.S., 1934. The use of confidence or fiducial limits illustrated in the case of the binomial. Biometrika 26: 404-413.
+#' Sterne, T.E., 1954. Some remarks on confidence or fiducial limits. Biometrika 41: 275-278.
+#' Wilson, E.B., 1927. Probable inference, the law of succession, and statistical inference. Journal of the American Statistical Association 22:209-212.
+#'
+#'
 #' @export
 
 prevCI <- function(data,
                    column,
-                   method = c("ClopPear", "Blaker", "Stern", "Wilson"),
+                   method = c("ClopPear", "Blaker", "Sterne", "Wilson"),
                    group = NULL,
                    conf = 0.95,
                    tolerance = 1e-05,
@@ -103,7 +110,7 @@ prevCI <- function(data,
                              conf = conf,
                              group = group,
                              tolerance = tolerance),
-             Stern = sterne(data = data,
+             Sterne = sterne(data = data,
                            column = column,
                            group = group,
                            conf = conf),

@@ -24,6 +24,13 @@
 #' # Adding a group
 #' Agg_meas(sex, "intensity", measure = "PoulinD", group = "sex")
 #'
+#' @references
+#' Guyatt, H.L. and Bundy, D.A.P., 1991. Estimating prevalence of community morbidity due to intestinal helminths: prevalence of infection as an indicator of the prevalence of disease. Transactions of the Royal Society of Tropical Medicine and Hygiene 85:778-782.
+#' Lloyd, M. 1967. Mean crowding. Journal of Animal Ecology 36: 1–30.
+#' Poulin, R., 1993. The disparity between observed and uniform distributions: a new look at parasite aggregation. International journal for parasitology 23:937-944.
+#' Reiczigel, J., Lang, Z., Rózsa, L. and Tóthmérész, B., 2005. Properties of crowding indices and statistical tools to analyze parasite crowding data. Journal of Parasitology 91:245-252.
+#' Shaw, D.J. and Dobson, A.P., 1995. Patterns of macroparasite abundance and aggregation in wildlife populations: a quantitative review. Parasitology 111:S111-S133.
+#'
 #' @export
 
 Agg_meas <- function(data,
