@@ -91,7 +91,10 @@ boot2samp_t_test <- function(data,
    p_value <- round((1 - mean(abs(t.vect) > abs(t.est))), 3)
    message(paste0("Alternative Hypothesis: ",
                  cat[1], " != ", cat[2],
-                 "\n\nP-value = ", p_value))
+                 "\n\nP-value = ",
+                 if(p_value < 0.001){
+                   "< 0.001"
+                 } else p_value))
   }
 
   # Greater
@@ -99,7 +102,10 @@ boot2samp_t_test <- function(data,
    p_value <- round((1 - mean(t.vect > t.est)), 3)
    message(paste0("Alternative Hypothesis: ",
                  cat[1], " > ", cat[2],
-                 "\n\nP-value = ", p_value))
+                 "\n\nP-value = ",
+                 if(p_value < 0.001){
+                   "< 0.001"
+                 } else p_value))
   }
 
   # Less
@@ -107,7 +113,10 @@ boot2samp_t_test <- function(data,
     p_value <- round((1 - mean(t.vect < t.est)), 3)
     message(paste("Alternative Hypothesis: ",
                   cat[1], " < ", cat[2],
-                  "\n\nP-value = ", p_value))
+                  "\n\nP-value = ",
+                  if(p_value < 0.001){
+                    "< 0.001"
+                  } else p_value))
   }
 
   invisible(p_value)
