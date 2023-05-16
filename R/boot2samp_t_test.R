@@ -78,45 +78,69 @@ boot2samp_t_test <- function(data,
   # Now create bootstrapping function
   boot_fun <- function(){
       A <- sample(df1, nrow(data), replace = T)
+      mean_A <- mean(A)
       B <- sample(df2, nrow(data), replace = T)
-      test <- t.test(A, B, var.equal = F)
-      test$stat
+      mean_B <- mean(B)
+      test <- t.test(A, B, var.equal = F)$stat
+      dat <- rbind(mean_A, mean_B, test) %>% as.data.frame()
+      return(dat)
   }
 
   # Now replicate that function
-  t.vect <- replicate(r, boot_fun())
+  t.vect <- data.frame(do.call(rbind, replicate(r, boot_fun())))
+  colnames(t.vect) <- c("MeanA",
+                        "MeanB",
+                        "Stat")
 
   # Now for two.sided
   if(alternative == "two.sided"){
-   p_value <- round((1 - mean(abs(t.vect) > abs(t.est))), 3)
+   p_value <- (1 - mean(abs(t.vect$Stat) > abs(t.est)))
    message(paste0("Alternative Hypothesis: ",
-                 cat[1], " != ", cat[2],
-                 "\n\nP-value = ",
-                 if(p_value < 0.001){
-                   "< 0.001"
-                 } else p_value))
+                 cat[1], " != ", cat[2]))
+
+   if(p_value < 0.001){
+     cat("P-value < 0.001 \n")
+   } else cat("P-value = ", p_value, "\n")
+
+   cat(paste0("'", cat[1], "'", " Estimated Mean = ", round(mean(t.vect$MeanA), 3),
+                "\n",
+                "'", cat[2], "'", " Estimated Mean = ", round(mean(t.vect$MeanB), 3),
+              "\n",
+              "Estimated Difference in Means = ", round(mean(t.vect$MeanA) - mean(t.vect$MeanB), 3)))
   }
 
   # Greater
   if(alternative == "greater"){
-   p_value <- round((1 - mean(t.vect > t.est)), 3)
+   p_value <- (1 - mean(t.vect$Stat > t.est))
    message(paste0("Alternative Hypothesis: ",
-                 cat[1], " > ", cat[2],
-                 "\n\nP-value = ",
-                 if(p_value < 0.001){
-                   "< 0.001"
-                 } else p_value))
+                  cat[1], " > ", cat[2]))
+
+   if(p_value < 0.001){
+     cat("P-value < 0.001 \n")
+   } else cat("P-value = ", p_value, "\n")
+
+   cat(paste0("'", cat[1], "'", " Estimated Mean = ", round(mean(t.vect$MeanA), 3),
+              "\n",
+              "'", cat[2], "'", " Estimated Mean = ", round(mean(t.vect$MeanB), 3),
+              "\n",
+              "Estimated Difference in Means = ", round(mean(t.vect$MeanA) - mean(t.vect$MeanB), 3)))
   }
 
   # Less
   if(alternative == "less"){
-    p_value <- round((1 - mean(t.vect < t.est)), 3)
-    message(paste("Alternative Hypothesis: ",
-                  cat[1], " < ", cat[2],
-                  "\n\nP-value = ",
-                  if(p_value < 0.001){
-                    "< 0.001"
-                  } else p_value))
+    p_value <- (1 - mean(t.vect$Stat < t.est))
+    message(paste0("Alternative Hypothesis: ",
+                   cat[1], " < ", cat[2]))
+
+    if(p_value < 0.001){
+      cat("P-value < 0.001 \n")
+    } else cat("P-value = ", p_value, "\n")
+
+    cat(paste0("'", cat[1], "'", " Estimated Mean = ", round(mean(t.vect$MeanA), 3),
+               "\n",
+               "'", cat[2], "'", " Estimated Mean = ", round(mean(t.vect$MeanB), 3),
+               "\n",
+               "Estimated Difference in Means = ", round(mean(t.vect$MeanA) - mean(t.vect$MeanB), 3)))
   }
 
   invisible(p_value)
